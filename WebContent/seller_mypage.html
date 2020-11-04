@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<style>
+      /* 헤더 */
+      header {
+        text-align: center;
+        margin-top: 75px;
+      }
+
+      header .thumb {
+        width: 92px;
+        height: 92px;
+        border-radius: 50%;
+        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.1),
+          0 12px 24px 0 rgba(0, 0, 0, 0.24);
+      }
+      
+      .list {
+        margin-top: 48px;
+      }
+
+      .list .item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        font-size: 15px;
+      }
+
+      .list .item .left {
+        display: flex;
+        align-items: center;
+      }
+
+      .list .item .left .name {
+        margin-left: 6px;
+      }
+
+      .list .item .right {
+        opacity: 0.5;
+      }
+
+      .list .item img {
+        padding: 20px 22px;
+      }
+
+      .list .item .right img {
+        padding-right: 14px;
+      }
+       
+  </style>
+</head>
+<body>
+
+	<h3 align="center">MY PAGE</h3>
+	<header>
+      <div class="thumb-wrapper">
+        <img class="thumb" src="img/user-thumb.png" />
+      </div>
+
+      <div class="text-area">
+        <h2 class="greeting">Hi, Mary Jane</h2>
+        <div class="desc">
+          We’ll make a mobile magazine <br />
+          using html, css only.
+        </div>
+      </div>
+
+      <div class="mail mouse-effect">
+        <a href="mailto:anjihhg@gmail.com">anjihhg@gmail.com</a>
+      </div>
+    </header>
+	
+	<ul class="list">
+
+
+		<li class="item mouse-effect">
+			<div class="left">
+				<a href="seller_res_check.html"><img src="img/icon/account.svg"  ></a>
+				<div class="name">고객 예약 확인 및 취소</div>
+			</div>
+			<div class="right">
+				<img src="img/icon/right_arrow.svg" />
+			</div>
+		</li>
+
+		<li class="item mouse-effect">
+			<div class="left">
+				<a href="seller_info.html"><img src="img/icon/business.svg" /></a>
+				<div class="name">고객 정보 확인</div>
+			</div>
+			<div class="right">
+				<img src="img/icon/right_arrow.svg" />
+			</div>
+		</li>
+
+		<li class="item mouse-effect">
+			<div class="left">
+				<a href="seller_detail_update.html"><img src="img/icon/bookmark.svg" /></a>
+				<div class="name">호텔 정보 수정</div>
+			</div>
+			<div class="right">
+				<img src="img/icon/right_arrow.svg" />
+			</div>
+		</li>
+
+	</ul>
+
+</body>
+</html>

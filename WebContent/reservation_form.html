@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+</head>
+<body>
+	<div id="app">
+		<form action="#">
+			<div>
+				<table>
+					<tr>
+						<th>1단계: 예약자 정보</th>
+					</tr>
+				</table>
+				<b>성</b> 영문으로 입력해주세요.<br>이 객실의 숙박객 중 한 명의 이름을 입력해 주세요. <br>
+				<input type="text">
+				<p>
+					<b>이름</b> 영문으로 입력해주세요.<br> <input type="text">
+				<p>
+					<b>이메일 주소</b><br>이 주소로 확인 이메일을 보내드립니다. <br> <input
+						type="text">
+				<p>
+					<b>휴대폰 번호</b><br>비상시에만 연락을 드립니다. <br> <input type="text">
+			</div>
+			<div>
+				<table>
+					<tr>
+						<th>2단계: 객실 세부 정보</th>
+					</tr>
+				</table>
+				객실 세부 정보 :
+			</div>
+			<div>
+				<input type="submit" value="결제 페이지로">
+			</div>
+		</form>
+	</div>
+	<script>
+		var app = new Vue({
+			el : '#app',
+			data() {
+				
+			}
+		})
+	</script>
+</body>
+</html>

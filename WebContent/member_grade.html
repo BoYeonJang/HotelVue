@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<style type="text/css">
+*{margin:0; padding:0;}
+.star{
+  display:inline-block;
+  width: 30px;height: 60px;
+  cursor: pointer;
+}
+.star_left{
+  background: url(http://gahyun.wooga.kr/main/img/testImg/star.png) no-repeat 0 0; 
+  background-size: 60px; 
+  margin-right: -3px;
+}
+.star_right{
+  background: url(http://gahyun.wooga.kr/main/img/testImg/star.png) no-repeat -30px 0; 
+  background-size: 60px; 
+  margin-left: -3px;
+}
+.star.on{
+  background-image: url(http://gahyun.wooga.kr/main/img/testImg/star_on.png);
+}
+
+</style>
+</head>
+<body>
+<h2>호텔 평점 및 후기</h2>
+<div class="star-box">
+  <span class="star star_left"></span>
+  <span class="star star_right"></span>
+
+  <span class="star star_left"></span>
+  <span class="star star_right"></span>
+
+  <span class="star star_left"></span>
+  <span class="star star_right"></span>
+
+ <span class="star star_left"></span>
+ <span class="star star_right"></span>
+
+ <span class="star star_left"></span>
+ <span class="star star_right"></span>
+</div>
+</body>
+</html>

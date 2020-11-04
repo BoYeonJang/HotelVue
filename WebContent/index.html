@@ -1,24 +1,114 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://unpkg.com/vue"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <link rel="stylesheet" href="./css/header.css">
 </head>
+
 <body>
-	<div id='app'>
-	
-	</div>
-	<script>
-		var app = new Vue ({
-			el : '#app',
-			data() {
-				
-			}
-		});
-	</script>
+    <div id='app'>
+        <header>
+            <div class="nav">
+                <ul v-if="MemberEmpty">
+                    <li class="hotel"><a href="./index.html">Premium</a></li>
+                    <li class="login" style=" float:right "><a href="login_member.html">로그인</a></li>
+                    <li style="float:right "><a href="# ">회원가입</a></li>
+                </ul>
+                <ul v-else>
+                    <li class="hotel "><a href="./index.html">Premium</a></li>
+                    <li class="lougout" style=" float:right" :click="logout">
+                        <a href="./index.html" @click="logout">로그아웃</a>
+                    </li>
+                    </li>
+                    <li style="float:right "><a href="member_mypage.html">마이페이지</a></li>
+                </ul>
+            </div>
+        </header>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>어디로 떠나고 싶으세요?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text "></td>
+                    </tr>
+                    <tr>
+                        <td>목적지 혹은 숙박 시설 이름을 입력하세요.</td>
+                    </tr>
+                    <tr>
+                        <td>체크인</td>
+                        <td>체크아웃</td>
+                    </tr>
+                    <tr>
+                        <td><input type="date "></td>
+                        <td><input type="date "></td>
+                    </tr>
+                    <tr>
+                        <td>객실</td>
+                        <td>인원</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- 나중에 for문으로 10까지 루프 돌리기 --><select name=guestroom>
+								<option value="1 " selected="selected ">1</option>
+								<option value="2 ">2</option>
+								<option value="3 ">3</option>
+								<option value="3 ">4</option>
+								<option value="3 ">5</option>
+						</select>
+                        </td>
+                        <td>
+                            <!-- 나중에 for문으로 10까지 루프 돌리기 --><select name="personnel ">
+								<option value="1 ">1</option>
+								<option value="2 " selected="selected ">2</option>
+								<option value="3 ">3</option>
+								<option value="3 ">4</option>
+								<option value="3 ">5</option>
+						</select>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <button type="button ">검색</button>
+                        </td>
+                        <tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+                el: '#app',
+                data: {
+                    MemberEmpty: localStorage.getItem('ss'),
+                    loading: true,
+                    errored: false
+                },
+                mounted() {
+                    let login = localStorage.getItem("loginId");
+                    if (login != null) {
+                        this.MemberEmpty = false;
+                    }
+
+                }, // mounted,
+                methods: {
+                    logout() {
+                        localStorage.removeItem("loginId")
+
+                        location.href = './index.html'
+                    }
+                },
+            }) // Vue
+    </script>
 </body>
+
 </html>

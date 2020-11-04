@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="EUC-KR">
+    <title>회원가입</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+        <form action="#" method="POST" name="registForm" id="registForm" @submit.prevent="registMember">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>회원 기본 정보</td>
+                    </tr>
+                    <tr>
+                        <td>아이디</td>
+                        <td><input type="text" name="id" id="id" v-model="cid"></td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호</td>
+                        <td><input type="password" name="password" id="password" v-model="cpassword"></td>
+                    </tr>
+                    <tr>
+                        <td>성명</td>
+                        <td><input type="text" name="name" id="name" v-model="cname"></td>
+                    </tr>
+                    <tr>
+                        <td>핸드폰 번호</td>
+                        <td><input type="text" name="phone" id="phone" v-model="cphone"></td>
+                    </tr>
+                    <tr>
+                        <td>주소</td>
+                        <td><input type="text" name="address" id="address" v-model="caddress"></td>
+                    </tr>
+                    <tr>
+                        <td>이메일 주소</td>
+                        <td><input type="text" name="email" id="email" v-model="cemail"></td>
+                    </tr>
+                    <tr>
+                        <td>호텔 id</td>
+                        <td><input type="text" name="hotelId" id="hotelId" v-model="chotel_id"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" name="button">회원 가입</button>
+        </form>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    info: [],
+                    loading: true,
+                    errored: false,
+                    cid: '',
+                    cpassword: '',
+                    cname: '',
+                    cphone: '',
+                    caddress: '',
+                    cemail: '',
+                    chotel_id: ''
+                }
+            }, //data
+            mounted() {
+                axios
+                    .get("http://localhost:8888/api/findAllMember")
+                    .then(response => (this.info = response.data))
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true
+                    })
+                    .finally(() => this.loading = false)
+            },
+            methods: {
+                registMember() {
+                    if (this.cid == "") {
+                        alert('아이디를 입력하세요');
+                        return;
+                    }
+                    if (this.cpassword == "") {
+                        alert('비밀번호를 입력하세요');
+                        return;
+                    }
+                    if (this.cname == "") {
+                        alert('이름을 입력하세요');
+                        return;
+                    }
+                    if (this.cphone == "") {
+                        alert('핸드폰 번호를 입력하세요');
+                        return;
+                    }
+                    if (this.caddress == '') {
+                        alert('주소를 입력하세요');
+                        return;
+                    }
+                    if (this.cemail == '') {
+                        alert('이메일를 입력하세요');
+                        return;
+                    }
+
+
+                    axios
+                        .post("http://localhost:8888/api/registMember", {
+                            id: this.cid,
+                            password: this.cpassword,
+                            name: this.cname,
+                            phone: this.cphone,
+                            address: this.caddress,
+                            email: this.cemail,
+                            hotel_id: this.chotel_id,
+                        })
+                        .then(function(response) {
+                            //alert(app.cname + '님이 등록 되셨습니다.');
+                            alert(`${app.cname} 님이 등록 되셨습니다.`);
+                            location.href = "./login_member.html";
+                        })
+                }
+            } //method
+
+        })
+    </script>
+</body>
+
+</html>

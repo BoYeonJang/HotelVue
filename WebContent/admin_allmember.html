@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="EUC-KR">
+    <title>관리자 My Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id='app'>
+        <div class='headtitle'>
+            <h2>회원 리스트</h2>
+        </div>
+        <div class='search_box'></div>
+        <table class='list_table'>
+            <tr>
+                <th>회원 아이디</th>
+                <th>회원 비밀번호</th>
+                <th>회원 이름</th>
+                <th>회원 전화번호</th>
+                <th>회원 주소</th>
+                <th>회원 이메일</th>
+                <th>호텔 아이디</th>
+            </tr>
+
+            <tr v-for="member in info">
+                <td v-html="member.id"></td>
+                <td v-html="member.name"></td>
+                <td v-html="member.phone"></td>
+                <td v-html="member.address"></td>
+                <td v-html="member.email"></td>
+                <td v-html="member.hotel_id"></td>
+                <td><input type="button" name="delete" value="회원 삭제" @click="deleteMember(member.id)"></td>
+            </tr>
+
+        </table>
+
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    info: [],
+                    loading: true,
+                    errored: false,
+                    cid: '',
+                    cpassword: '',
+                    cname: '',
+                    cphone: '',
+                    caddress: '',
+                    cemail: '',
+                    chotel_id: '',
+                    cmemberid: ''
+                }
+            }, //data
+            mounted() {
+                axios
+                    .get("http://localhost:8888/api/findAllMember")
+                    .then(response => (this.info = response.data))
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+            },
+            methods: {
+                deleteMember(memberId) {
+                    axios
+                        .delete("http://localhost:8888/api/deleteMember/" + memberId)
+                        .then(response => {
+                            alert(response.data)
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(function() {
+                            this.loading = false
+                            location.href = "./admin_allmember.html"
+                        })
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

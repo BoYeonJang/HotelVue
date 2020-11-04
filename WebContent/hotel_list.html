@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<style type="text/css">
+.table size {
+	width: 200;
+	height: 200;
+}
+</style>
+</head>
+<body>
+	<div id='app'>
+		<div>
+			<table v-for="h in hotel">
+				<tr>
+					<td>{{h.name}}</td>
+				</tr>
+				<tr>
+					<td>{{h.location}}</td>
+					<td>가격</td>
+				</tr>
+				<tr>
+					<td><img :src="h.img"></td>
+					<td><button @click="add(h.id)">선택</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<script> 
+		var app = new Vue ({
+			el : '#app',
+			data() {
+				return{
+					hotel : [],
+					loading : true,
+					errored : false	
+				}
+				
+			},//data
+			mounted(){
+				axios
+				.get("http://127.0.0.1:8888/findAllHotel")
+				.then(response => (this.hotel = response.data))
+				.catch(error =>{
+					console.log(error);
+					this.errored=true;
+				})
+				.finally(()=>this.loading =false)
+			},
+			methods:{
+				add(id){
+					location.href="http://127.0.0.1:8888/findRoomByHotelId/"+id;
+				}
+			}
+		});
+	</script>
+</body>
+</html>

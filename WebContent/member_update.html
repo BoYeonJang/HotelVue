@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<style type="text/css">
+
+</style>
+</head>
+
+<body>
+
+<h2>개인정보 수정</h2>
+<div id="app">
+	<div>
+	<form action="#" method="POST" name="updateForm" id="frm" @submit.prevent="">
+	아이디 : <input type="text" id="id" name="id" v-model="" ><p>
+	비밀번호 : <input type="text" id="password" name="password" v-model=""><p>
+	이름 : <input type="text" id="name" name="name" v-model=""><p>
+	전화번호 : <input type="text" id="phone" name="phone" v-model=""><p>
+	주소 : <input type="text" id="address" name="address" v-model=""><p>
+	이메일 : <input type="text" id="email" name="email" v-model=""><p>
+	
+	<button type="submit">
+	수정 완료
+	</button>
+	</form>
+	
+	
+	</div>
+
+</div>
+<script>
+	var app = new Vue({
+		el:'#app',
+		data(){
+			return{
+				info:[],
+				loading:true,
+				errored:false,
+				mid:'',
+				mpw:'',
+				mname:'',
+				mnumber:'',
+				maddr:'',
+				memail:''
+			}
+		},
+		
+		mounted(){
+            axios
+            .get("http://127.0.0.1:9999/api/")
+            .then(response=>(this.info = response.data))
+            .catch(error=>{
+                console.log(error);
+                this.errored = true
+            })
+            .finally(()=>this.loading = false)
+        },
+        
+        methods:{
+        	addEmployee(){
+        		if(this.mid=="") {alert('아이디를 입력하세요'); return ;}
+        		if(this.mpw=="") {alert('비밀번호를 입력하세요'); return ;}
+        		if(this.mname=="") {alert('이름을 입력하세요'); return ;}
+        		if(this.mnumber=="") {alert('전화번호를 입력하세요'); return ;}
+        		if(this.maddr=="") {alert('주소를 입력하세요'); return ;}
+        		if(this.memail=="") {alert('이메일 주소를 입력하세요'); return ;}
+        		
+        		axios
+        		.post("http://127.0.0.1:9999/api/addEmployee", {
+        			name:this.cname,
+        			mailid:this.cmailid,
+        			start_date:this.cstart_date,
+        			salary:this.csalary,
+        			commission_pct:this.ccommission_pct,
+        			manager_id:this.cmanager_id,
+        			title:this.ctitle,
+        			dept_id:this.cdept_id,
+        			id:this.cid
+        		})
+        		.then(function(response){
+        			//alert(app.cname+'님이 등록되었습니다.');
+        			alert(`${app.cname} 님 정보 수정 완료되었습니다.);
+        			location.href="./index01.html";
+        		})
+      
+        	}
+        }
+		
+		
+	})
+
+</script>
+</body>
+</html>
