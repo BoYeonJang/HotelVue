@@ -97,7 +97,8 @@
 					room : {},
 					hotel : {},
 					ccontent : '',
-					cscore : ''
+					cscore : '',
+					empty : localStorage.getItem('loginId') == null
 				}
 			},//data
 			mounted(){
@@ -157,7 +158,6 @@
 					.finally(()=> this.loading =false)
 				},
 				addReview() {
-					console.log(this.ccontent + this.cscore + this.member.id + this.hotel.id)
 					axios
 	                .post("http://localhost:8888/addReview",{
 	                	content : this.ccontent,
