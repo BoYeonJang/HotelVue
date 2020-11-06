@@ -28,7 +28,6 @@
 					</a></li>
 					<li class="logout" style="float: right" :click="logout"><a
 						href="./index.html" @click="logout()">로그아웃</a></li>
-					</li>
 					<li class="logout" style="float: right"><a
 						href="./member_mypage.html">마이페이지</a></li>
 				</ul>
@@ -109,8 +108,9 @@
             },
             methods: {
                 logout() {
-                    localStorage.removeItem("loginId")
-                    location.href = './index.html'
+                    localStorage.removeItem("loginId");
+                    localStorage.removeItem('hId');
+                    location.href = './index.html';
                 },
                 registMember() {
             		if(this.cid == "") {alert('아이디를 입력하세요'); return;}

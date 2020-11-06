@@ -75,16 +75,14 @@
                     <td><input type="text" v-model="city" class="city" placeholder="예) 서울, 미국"></td>
                     <td><input type="date" v-model="checkin" class="checkin" date-placeholder="체크인" required aria-required="true" required pattern="\d{2}-\d{2}"></td>
                     <td><input type="date" v-model="checkout" class="checkout" date-placeholder="체크아웃" required aria-required="true" required pattern="\d{2}-\d{2}"></td>
-                    <td>
-                        <select name="personnel" v-model="human" class="human">
+                    <td><select name="personnel" v-model="human" class="human">
 							<option value="">인원</option>
 							<option value="1">1</option>
 							<option value="2" selected="selected">2</option>
 							<option value="3">3</option>
 							<option value="4">4</option>
 							<option value="5">5</option>
-						</select>
-                    </td>
+					</select></td>
                 </tr>
                 <tr>
                     <td colspan="4">
@@ -98,14 +96,20 @@
         </div>
         <footer>
             <div class="footer">
-                <ul>
-                    <li><a href="/ShoppingMall/index.jsp">팀 소개</a></li>
-                    <li><a href="https://github.com/BoYeonJang/Hotel">Back-End 깃 주소</a></li>
-                    <li><a href="https://github.com/BoYeonJang/Hotel">Front-end 깃 주소</a></li><br>
-                    <li>
-                        <a href="./index.html"><img src="./img/title/hotelcombine.com.png"></a>
-                    </li>
-                </ul>
+                <table>
+                    <tr>
+                        <td><a href="#">팀 소개</a></td>
+                        <td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
+						깃 주소</a></td>
+                        <td><a href="https://github.com/BoYeonJang/Hotel">Back-End
+							깃 주소</a></td>
+                    </tr>
+                    <tr class="footer_img_center">
+                        <td colspan="3">
+                            <a href=" ./index.html "><img src="./img/title/hotelcombine.com.png "></a>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </footer>
     </div>
@@ -113,7 +117,7 @@
         var app = new Vue({
                 el: '#app',
                 data: {
-                	empty: localStorage.getItem('loginId') == null,
+                    empty: localStorage.getItem('loginId') == null,
                     city: '',
                     checkin: '',
                     checkout: '',
@@ -123,7 +127,7 @@
 
                 },
                 mounted() {
-                    let login = localStorage.getItem("loginId");
+                    let login = localStorage.getItem("loginId ");
                     console.log(this.MemberEmpty);
                     if (login != null) {
                         this.MemberEmpty = false;
@@ -132,16 +136,17 @@
                 }, // mounted,
                 methods: {
                     logout() {
-                        localStorage.removeItem("loginId");
+                        localStorage.removeItem("loginId ");
                         localStorage.removeItem('login');
+                        localStorage.removeItem('hId');
                         location.href = './index.html';
                     },
                     select(city, checkin, checkout, human) {
-                        location.href = "./hotel_list.html";
-                        sessionStorage.setItem("city", city);
-                        sessionStorage.setItem("checkin", checkin);
-                        sessionStorage.setItem("checkout", checkout);
-                        sessionStorage.setItem("limit", human);
+                        location.href = "./hotel_list.html ";
+                        sessionStorage.setItem("city ", city);
+                        sessionStorage.setItem("checkin ", checkin);
+                        sessionStorage.setItem("checkout ", checkout);
+                        sessionStorage.setItem("limit ", human);
                     }
                 },
             }) // Vue

@@ -2,85 +2,77 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-    <link rel="stylesheet" href="./css/header.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<link rel="stylesheet" href="./css/header.css">
 </head>
 
 <body>
-    <div id="app">
-        <header>
-            <div class="nav">
-                <ul v-if="empty">
-                    <li class="hotel">
-                        <a href="./index.html">
-                            <img src="./img/title/hotelcombine.com.png">
-                        </a>
-                    </li>
-                    <li class="login" style=" float:right">
-                        <a href="./login_member.html">로그인</a>
-                    </li>
-                    <li class="login" style="float:right"><a href="./register_member.html">회원가입</a></li>
-                </ul>
-                <ul v-else>
-                    <li class="hotel">
-                        <a href="./index.html">
-                            <img src="./img/title/hotelcombine.com.png">
-                        </a>
-                    </li>
-                    <li class="logout" style="float:right" :click="logout">
-                        <a href="./index.html" @click="logout()">로그아웃</a>
-                    </li>
-                    </li>
-                    <li class="logout" style="float:right"><a href="./member_mypage.html">마이페이지</a></li>
-                </ul>
-            </div>
-        </header>
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>1단계: 예약자 정보</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><b>이름</b> 영문 이름이 맞는지 확인해주세요.<br></td>
-                    </tr>
-                    <tr>
-                        <td v-html="member.name"></td>
-                    </tr>
-                    <tr>
-                        <td><b>이메일 주소</b> 이 이메일 주소가 맞는지 확인해주세요.<br></td>
-                    </tr>
-                    <tr>
-                        <td v-html="member.email"></td>
-                    </tr>
-                    <tr>
-                        <td><b>휴대폰 번호</b> 이 휴대폰 번호가 맞는지 확인해주세요.<br></td>
-                    </tr>
-                    <tr>
-                        <td v-html="member.phone"></td>
-                    </tr>
-                    <tr>
-                        <th>2단계: 객실 세부 정보</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            방 이름: {{room.name}}
-                        </td>
-                        <td>
-                            방 가격: {{room.price}}
-                        </td>
-                    </tr>
-                </tbody>
-                <td><button @click="add(room.id)">결제 페이지</button></td>
-            </table>
-        </div>
-    </div>
-    <script>
+	<div id="app">
+		<header>
+			<div class="nav">
+				<ul v-if="empty">
+					<li class="hotel"><a href="./index.html"> <img
+							src="./img/title/hotelcombine.com.png">
+					</a></li>
+					<li class="login" style="float: right"><a
+						href="./login_member.html">로그인</a></li>
+					<li class="login" style="float: right"><a
+						href="./register_member.html">회원가입</a></li>
+				</ul>
+				<ul v-else>
+					<li class="hotel"><a href="./index.html"> <img
+							src="./img/title/hotelcombine.com.png">
+					</a></li>
+					<li class="logout" style="float: right" :click="logout"><a
+						href="./index.html" @click="logout()">로그아웃</a></li>
+					<li class="logout" style="float: right"><a
+						href="./member_mypage.html">마이페이지</a></li>
+				</ul>
+			</div>
+		</header>
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th>1단계: 예약자 정보</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><b>이름</b> 영문 이름이 맞는지 확인해주세요.<br></td>
+					</tr>
+					<tr>
+						<td v-html="member.name"></td>
+					</tr>
+					<tr>
+						<td><b>이메일 주소</b> 이 이메일 주소가 맞는지 확인해주세요.<br></td>
+					</tr>
+					<tr>
+						<td v-html="member.email"></td>
+					</tr>
+					<tr>
+						<td><b>휴대폰 번호</b> 이 휴대폰 번호가 맞는지 확인해주세요.<br></td>
+					</tr>
+					<tr>
+						<td v-html="member.phone"></td>
+					</tr>
+					<tr>
+						<th>2단계: 객실 세부 정보</th>
+					</tr>
+					<tr>
+						<td>방 이름: {{room.name}}</td>
+						<td>방 가격: {{room.price}}</td>
+					</tr>
+				</tbody>
+				<td><button @click="add(room.id)">결제 페이지</button></td>
+			</table>
+		</div>
+	</div>
+	<script>
         var app = new Vue({
             el: '#app',
             data() {
@@ -123,6 +115,7 @@
                 },
                 logout() {
                     localStorage.removeItem("loginId")
+                    localStorage.removeItem('hId');
                     location.href = './index.html'
                 }
             }

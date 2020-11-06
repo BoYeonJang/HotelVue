@@ -2,65 +2,61 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-    <link rel="stylesheet" href="./css/header.css">
-    <style type="text/css">
-        table size {
-            width: 200;
-            height: 200;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<link rel="stylesheet" href="./css/header.css">
+<style type="text/css">
+table size {
+	width: 200;
+	height: 200;
+}
+</style>
 </head>
 
 <body>
-    <div id='app'>
-        <header>
-            <div class="nav">
-                <ul v-if="empty">
-                    <li class="hotel">
-                        <a href="./index.html">
-                            <img src="./img/title/hotelcombine.com.png">
-                        </a>
-                    </li>
-                    <li class="login" style=" float:right">
-                        <a href="./login_member.html">로그인</a>
-                    </li>
-                    <li class="login" style="float:right"><a href="./register_member.html">회원가입</a></li>
-                </ul>
-                <ul v-else>
-                    <li class="hotel">
-                        <a href="./index.html">
-                            <img src="./img/title/hotelcombine.com.png">
-                        </a>
-                    </li>
-                    <li class="logout" style="float:right" :click="logout">
-                        <a href="./index.html" @click="logout()">로그아웃</a>
-                    </li>
-                    </li>
-                    <li class="logout" style="float:right"><a href="./member_mypage.html">마이페이지</a></li>
-                </ul>
-            </div>
-        </header>
-        <div>
-            <table v-for="h in hotel">
-                <tr>
-                    <td>{{h.name}}</td>
-                </tr>
-                <tr>
-                    <td>{{h.location}}</td>
-                    <td>가격</td>
-                </tr>
-                <tr>
-                    <td><img :src="h.img"></td>
-                    <td><button @click="add(h.id)">선택</button></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <script>
+	<div id='app'>
+		<header>
+			<div class="nav">
+				<ul v-if="empty">
+					<li class="hotel"><a href="./index.html"> <img
+							src="./img/title/hotelcombine.com.png">
+					</a></li>
+					<li class="login" style="float: right"><a
+						href="./login_member.html">로그인</a></li>
+					<li class="login" style="float: right"><a
+						href="./register_member.html">회원가입</a></li>
+				</ul>
+				<ul v-else>
+					<li class="hotel"><a href="./index.html"> <img
+							src="./img/title/hotelcombine.com.png">
+					</a></li>
+					<li class="logout" style="float: right" :click="logout"><a
+						href="./index.html" @click="logout()">로그아웃</a></li>
+					<li class="logout" style="float: right"><a
+						href="./member_mypage.html">마이페이지</a></li>
+				</ul>
+			</div>
+		</header>
+		<div>
+			<table v-for="h in hotel">
+				<tr>
+					<td>{{h.name}}</td>
+				</tr>
+				<tr>
+					<td>{{h.location}}</td>
+					<td>가격</td>
+				</tr>
+				<tr>
+					<td><img :src="h.img"></td>
+					<td><button @click="add(h.id)">선택</button></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<script>
         var app = new Vue({
             el: '#app',
             data() {
@@ -92,9 +88,10 @@
                     sessionStorage.setItem("hotel", id); //
                 },
                 logout() {
-                    localStorage.removeItem("loginId")
-					localStorage.removeItem("login")
-                    location.href = './index.html'
+                    localStorage.removeItem("loginId");
+					localStorage.removeItem("login");
+					localStorage.removeItem('hId');
+                    location.href = './index.html';
                 }
             }
         });

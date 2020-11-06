@@ -29,7 +29,6 @@
 					</a></li>
 					<li class="logout" style="float: right" :click="logout"><a
 						href="./index.html" @click="logout()">로그아웃</a></li>
-					</li>
 					<li class="logout" style="float: right"><a
 						href="./member_mypage.html">마이페이지</a></li>
 				</ul>
@@ -93,6 +92,7 @@
                         .then(function(response) {
                             alert(`${response.data.name} 님이 로그인 하셨습니다`)
                             localStorage.setItem('loginId', document.getElementById('id').value);
+                            localStorage.removeItem('hId');
                             location.href = "./index.html";
                         })
                 }
