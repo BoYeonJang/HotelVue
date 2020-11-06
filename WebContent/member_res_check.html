@@ -9,6 +9,7 @@
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="./css/mypage.css">
+<link rel="stylesheet" href="./css/header.css">
 </head>
 <body>
 	<h2>예약내역 확인</h2>
@@ -30,7 +31,6 @@
 					</a></li>
 					<li class="logout" style="float: right" :click="logout"><a
 						href="./index.html" @click="logout()">로그아웃</a></li>
-					</li>
 					<li class="logout" style="float: right"><a
 						href="./member_mypage.html">마이페이지</a></li>
 				</ul>
@@ -63,7 +63,7 @@
 					<td><input type="button" name="delete" value="예약 취소"
 						@click="deleteReservation(reservation.id)"></td>
 					<td><input type="button" name="grade" value="평점/후기"
-						src="member_makr.html"></td>
+						@click="addReview(reservation.id)"></td>
 				</tr>
 				</template> </template> </template> </template>
 			</tbody>
@@ -155,7 +155,12 @@ var app = new Vue({
 		},
     	logout() {
             localStorage.removeItem("loginId")
+            localStorage.removeItem('hId');
             location.href = './index.html'
+        },
+        addReview(reservationId) {
+        	localStorage.setItem("reservationReview", reservationId)
+        	location.href = './star_rating.html'
         }
 	}
 });
