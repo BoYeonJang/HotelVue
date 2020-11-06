@@ -1,17 +1,27 @@
 <header>
     <div class="nav">
-        <ul v-if="MemberEmpty">
-            <li class="hotel"><a href="./index.html">Premium</a></li>
-            <li class="login" style=" float:right "><a href="login_member.html">로그인</a></li>
-            <li style="float:right "><a href="# ">회원가입</a></li>
+        <ul v-if="empty">
+            <li class="hotel">
+                <a href="./index.html">
+                    <img src="./img/title/hotelcombine.com.png">
+                </a>
+            </li>
+            <li class="login" style=" float:right">
+                <a href="./login_member.html">로그인</a>
+            </li>
+            <li class="login" style="float:right"><a href="./register_member.html">회원가입</a></li>
         </ul>
         <ul v-else>
-            <li class="hotel "><a href="./index.html">Premium</a></li>
-            <li class="lougout" style=" float:right" :click="logout">
-                <a href="./index.html" @click="logout">로그아웃</a>
+            <li class="hotel">
+                <a href="./index.html">
+                    <img src="./img/title/hotelcombine.com.png">
+                </a>
+            </li>
+            <li class="logout" style="float:right" :click="logout">
+                <a href="./index.html" @click="logout()">로그아웃</a>
             </li>
             </li>
-            <li style="float:right "><a href="# ">마이페이지</a></li>
+            <li class="logout" style="float:right"><a href="./member_mypage.html">마이페이지</a></li>
         </ul>
     </div>
 </header>

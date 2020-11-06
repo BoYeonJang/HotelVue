@@ -6,6 +6,7 @@
     <title>Insert title here</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <link rel="stylesheet" href="./css/header.css">
     <style type="text/css">
         table size {
             width: 200;
@@ -16,6 +17,33 @@
 
 <body>
     <div id='app'>
+        <header>
+            <div class="nav">
+                <ul v-if="empty">
+                    <li class="hotel">
+                        <a href="./index.html">
+                            <img src="./img/title/hotelcombine.com.png">
+                        </a>
+                    </li>
+                    <li class="login" style=" float:right">
+                        <a href="./login_member.html">로그인</a>
+                    </li>
+                    <li class="login" style="float:right"><a href="./register_member.html">회원가입</a></li>
+                </ul>
+                <ul v-else>
+                    <li class="hotel">
+                        <a href="./index.html">
+                            <img src="./img/title/hotelcombine.com.png">
+                        </a>
+                    </li>
+                    <li class="logout" style="float:right" :click="logout">
+                        <a href="./index.html" @click="logout()">로그아웃</a>
+                    </li>
+                    </li>
+                    <li class="logout" style="float:right"><a href="./member_mypage.html">마이페이지</a></li>
+                </ul>
+            </div>
+        </header>
         <div>
             <table v-for="h in hotel">
                 <tr>
@@ -38,6 +66,11 @@
             data() {
                 return {
                     hotel: [],
+                    empty: localStorage.getItem('loginId') == null,
+                    city: sessionStorage.getItem('city'),
+                    checkin: sessionStorage.getItem('checkin'),
+                    checkout: sessionStorage.getItem('checkout'),
+                    limit: sessionStorage.getItem('limit'),
                     loading: true,
                     errored: false
                 }
@@ -45,7 +78,7 @@
             }, //data
             mounted() {
                 axios
-                    .get("http://127.0.0.1:8888/findAllHotel")
+                    .get("http://127.0.0.1:8888/findLikeHotelName/" + this.city)
                     .then(response => (this.hotel = response.data))
                     .catch(error => {
                         console.log(error);
@@ -56,8 +89,12 @@
             methods: {
                 add(id) {
                     location.href = "./hotel_detail.html";
-                    var sessionData = id
-                    sessionStorage.setItem("mineSession", sessionData); //
+                    sessionStorage.setItem("hotel", id); //
+                },
+                logout() {
+                    localStorage.removeItem("loginId")
+					localStorage.removeItem("login")
+                    location.href = './index.html'
                 }
             }
         });

@@ -1,0 +1,27 @@
+    @charset "UTF-8";
+    footer ul {
+        list-style-type: none;
+        overflow: hidden;
+        background-color: #1e3799;
+        padding-top: 1rem;
+        padding-bottom: 0.5rem;
+        padding-left: 30rem;
+    }
+    
+    footer li {
+        display: inline;
+        font-size: 1.25rem;
+    }
+    
+    footer li a {
+        display: inline;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+    }
+    
+    footer img {
+        width: 20rem;
+        height: auto;
+        padding-left: 5rem;
+    }

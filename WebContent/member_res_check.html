@@ -2,35 +2,163 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내가 한 예약들 보기</title>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="./css/mypage.css">
 </head>
 <body>
-<h2>예약내역 확인</h2>
-<div id="app">
-	<div>
+	<h2>예약내역 확인</h2>
+	<div id="app">
+		<header>
+			<div class="nav">
+				<ul v-if="empty">
+					<li class="hotel"><a href="./index.html"> <img
+							src="./img/title/hotelcombine.com.png">
+					</a></li>
+					<li class="login" style="float: right"><a
+						href="./login_member.html">로그인</a></li>
+					<li class="login" style="float: right"><a
+						href="./register_member.html">회원가입</a></li>
+				</ul>
+				<ul v-else>
+					<li class="hotel"><a href="./index.html"> <img
+							src="./img/title/hotelcombine.com.png">
+					</a></li>
+					<li class="logout" style="float: right" :click="logout"><a
+						href="./index.html" @click="logout()">로그아웃</a></li>
+					</li>
+					<li class="logout" style="float: right"><a
+						href="./member_mypage.html">마이페이지</a></li>
+				</ul>
+			</div>
+		</header>
 		<table border="3px">
 			<thead>
-			<tr>
-				<th>예약번호</th><th>일자</th><th>호텔명</th><th>인원</th><th>예약 내역</th><th>취소</th><th>후기</th>
-			</tr>
+				<tr>
+					<th>예약번호</th>
+					<th>일자</th>
+					<th>호텔명</th>
+					<th>인원</th>
+					<th>예약 내역</th>
+					<th>취소</th>
+					<th>후기</th>
+				</tr>
 			</thead>
 			<tbody>
+				<template v-for="reservation in reservations"> <template
+					v-for="room in rooms"> <template v-for="hotel in hotels">
+				<template
+					v-if="reservation.roomId == room.id & room.hotelId == hotel.id">
 				<tr>
-				<td>01</td>
-				<td>'checkin' ~ 'checkout'</td>
-				<td>호텔명</td>
-				<td>guest_number</td>
-				<td><input type="button" name="check" value="확인" src="./reservation_result.html"></td>
-				<td><input type="button" name="check" value="예약 취소" ></td>
-				<td><input type="button" name="grade" value="평점/후기" src="member_makr.html"></td>
+					<td>{{reservation.id}}</td>
+					<td>{{reservation.checkin}} ~ {{reservation.checkout}}</td>
+					<td>{{hotel.name}}</td>
+					<td>{{reservation.guestNumber}}</td>
+					<td><input type="button" name="res" id="res" value="상세 정보"
+						@click="reservationDetail(reservation.id)"></td>
+					<td><input type="button" name="delete" value="예약 취소"
+						@click="deleteReservation(reservation.id)"></td>
+					<td><input type="button" name="grade" value="평점/후기"
+						src="member_makr.html"></td>
 				</tr>
+				</template> </template> </template> </template>
 			</tbody>
 		</table>
 	</div>
+	<script>
 
-</div>
+
+var app = new Vue({
+	el:'#app',
+	data() {
+		return {
+			reservations : [],
+			loading : true,
+			errored : false,
+			member : {},
+			hotels : [],
+			rooms : [],
+			empty : localStorage.getItem('loginId') == null
+		}
+	},//data
+	mounted(){
+		this.initMember();
+	},
+	methods: {
+		initMember() {
+			axios
+			.get("http://localhost:8888/findMemberById/" + localStorage.getItem('loginId'))
+			.then(response => {
+				this.member = response.data;
+				this.retrieveReservations();
+				this.retrieveHotels();
+				this.retrieveRooms();
+			})
+			.catch(error =>{
+				console.log(error);
+				this.errored=true;
+			})
+			.finally(()=> this.loading =false)
+		},
+		retrieveReservations() {
+			axios
+			.get("http://localhost:8888/findReservationByMemberId/" + this.member.id)
+			.then(response => (this.reservations = response.data))
+			.catch(error =>{
+				console.log(error);
+				this.errored=true;
+			})
+			.finally(()=>this.loading =false)
+		},
+		retrieveHotels() {
+			axios
+			.get("http://localhost:8888/findAllHotel")
+			.then(response => (this.hotels = response.data))
+			.catch(error =>{
+				console.log(error);
+				this.errored=true;
+			})
+			.finally(()=>this.loading =false)
+		},
+		retrieveRooms() {
+			axios
+			.get("http://localhost:8888/findAllRoom")
+			.then(response => (this.rooms = response.data))
+			.catch(error =>{
+				console.log(error);
+				this.errored=true;
+			})
+			.finally(()=>this.loading =false)
+		},//retrieveRooms
+		deleteReservation(reservationId) {
+			axios
+			.delete("http://localhost:8888/deleteReservation/" + reservationId)
+			.then(response => {
+				this.retrieveReservations();
+				this.retrieveHotels();
+				this.retrieveRooms();
+			})
+			.catch(error =>{
+				console.log(error);
+				this.errored=true;
+			})
+			.finally(()=>this.loading =false)
+		},
+		reservationDetail(reservationId) {
+			var url = 'http://localhost:7777/HotelVue/reservation_detail.html';
+			localStorage.setItem("rId",reservationId);
+			$(location).attr('href',url);
+		},
+    	logout() {
+            localStorage.removeItem("loginId")
+            location.href = './index.html'
+        }
+	}
+});
+</script>
 </body>
 </html>

@@ -2,33 +2,58 @@
 <html>
 
 <head>
-    <meta charset="EUC-KR">
-    <title>Insert title here</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<link rel="stylesheet" href="./css/header.css">
 </head>
 
 <body>
-    <h2>개인 회원 로그인</h2>
-    <div id="app">
-        <div class="login_member">
-            <form action="#" method="post" name="loginForm" id="loginForm" @submit.prevent="loginMember">
-                <fieldset>
-                    <legend>로그인</legend>
-                    <p>
-                        아이디<br> <input type="text" placeholder="아이디를 입력하세요" id="id" name="id" v-model="cid">
-                    </p>
-                    <p>
-                        비밀번호<br> <input type="password" placeholder="비밀번호를 입력하세요" id="password" name="password" v-model="cpassword">
-                    </p>
-                </fieldset>
-                <button type="submit" name="submit">로그인</button>
-                <!-- <button type="button">아이디 찾기</button>
-         <button type="button">비밀번호 찾기</button> -->
-            </form>
-        </div>
-    </div>
-    <script>
+	<div id="app">
+		<header>
+			<div class="nav">
+				<ul v-if="empty">
+					<li class="hotel"><a href="./index.html"> <img
+							src="./img/title/hotelcombine.com.png">
+					</a></li>
+					<li class="login" style="float: right"><a
+						href="./login_member.html">로그인</a></li>
+					<li class="login" style="float: right"><a
+						href="./register_member.html">회원가입</a></li>
+				</ul>
+				<ul v-else>
+					<li class="hotel"><a href="./index.html"> <img
+							src="./img/title/hotelcombine.com.png">
+					</a></li>
+					<li class="logout" style="float: right" :click="logout"><a
+						href="./index.html" @click="logout()">로그아웃</a></li>
+					</li>
+					<li class="logout" style="float: right"><a
+						href="./member_mypage.html">마이페이지</a></li>
+				</ul>
+			</div>
+		</header>
+		<div class="login_member">
+			<form action="#" method="post" name="loginForm" id="loginForm"
+				@submit.prevent="loginMember()">
+				<fieldset>
+					<legend>로그인</legend>
+					<p>
+						아이디<br> <input type="text" placeholder="아이디를 입력하세요" id="id"
+							name="id" v-model="cid">
+					</p>
+					<p>
+						비밀번호<br> <input type="password" placeholder="비밀번호를 입력하세요"
+							id="password" name="password" v-model="cpassword">
+					</p>
+				</fieldset>
+				<button type="submit" name="submit">로그인</button>
+			</form>
+		</div>
+	</div>
+	<script>
         var app = new Vue({
             el: '#app',
             data() {
@@ -37,13 +62,14 @@
                     loading: true,
                     errored: false,
                     cid: '',
-                    cpassword: ''
+                    cpassword: '',
+                    empty: localStorage.getItem('loginId') == null
                 }
 
             }, //data
             mounted() {
                 axios
-                    .get("http://localhost:8888/api/findAllMember")
+                    .get("http://localhost:8888/findAllMember")
                     .then(response => (this.info = response.data))
                     .catch(error => {
                         console.log(error);
@@ -52,30 +78,25 @@
                     .finally(() => this.loading = false)
             },
             methods: {
+                logout() {
+                    localStorage.removeItem("loginId")
+                    location.href = './index.html'
+                },
                 loginMember() {
-                    if (this.cid == "") {
-                        alert('아이디를 입력하세요');
-                        return;
-                    }
-                    if (this.cpassword == "") {
-                        alert('비밀번호를 입력하세요');
-                        return;
-                    }
-
+            		if(this.cid == "") {alert('아이디를 입력하세요'); return;}
+            		if(this.cpassword == "") {alert('비밀번호를 입력하세요'); return;}
                     axios
-                        .post("http://localhost:8888/api/loginMember", {
+                        .post("http://localhost:8888/loginMember", {
                             id: this.cid,
                             password: this.cpassword,
                         })
                         .then(function(response) {
-                            alert(`${response.data.name} 님이 로그인하셨습니다.`)
-                            localStorage.setItem('loginId', JSON.stringify(response.data))
-                            localStorage.setItem("ss", true)
+                            alert(`${response.data.name} 님이 로그인 하셨습니다`)
+                            localStorage.setItem('loginId', document.getElementById('id').value);
                             location.href = "./index.html";
                         })
                 }
             } //method
-
         });
     </script>
 </body>

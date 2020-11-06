@@ -1,90 +1,127 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="EUC-KR">
-    <title>ê´€ë¦¬ì My Page</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<meta charset="EUC-KR">
+<title>°ü¸®ÀÚ My Page</title>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
+<style>
+table.list_table {
+	border-collapse: collapse;
+	text-align: left;
+	line-height: 1.5;
+	text-align: center;
+	width: 80%;
+	margin: auto;
+	font-family: Georgia, "Malgun Gothic", serif;
+}
 
+table.list_table thead th {
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	color: #369;
+	border-bottom: 10px solid #036;
+}
+
+table.list_table tbody th {
+	width: 150px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+	background: #f3f6f7;
+}
+
+table.list_table td {
+	width: 350px;
+	padding: 10px;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+}
+</style>
 <body>
-    <div id='app'>
-        <div class='headtitle'>
-            <h2>íšŒì› ë¦¬ìŠ¤íŠ¸</h2>
-        </div>
-        <div class='search_box'></div>
-        <table class='list_table'>
-            <tr>
-                <th>íšŒì› ì•„ì´ë””</th>
-                <th>íšŒì› ë¹„ë°€ë²ˆí˜¸</th>
-                <th>íšŒì› ì´ë¦„</th>
-                <th>íšŒì› ì „í™”ë²ˆí˜¸</th>
-                <th>íšŒì› ì£¼ì†Œ</th>
-                <th>íšŒì› ì´ë©”ì¼</th>
-                <th>í˜¸í…” ì•„ì´ë””</th>
-            </tr>
+	<div id='app'>
 
-            <tr v-for="member in info">
-                <td v-html="member.id"></td>
-                <td v-html="member.name"></td>
-                <td v-html="member.phone"></td>
-                <td v-html="member.address"></td>
-                <td v-html="member.email"></td>
-                <td v-html="member.hotel_id"></td>
-                <td><input type="button" name="delete" value="íšŒì› ì‚­ì œ" @click="deleteMember(member.id)"></td>
-            </tr>
+		<div class='headtitle'>
+			<h2>È¸¿ø ¸®½ºÆ®</h2>
+		</div>
+		<div class='search_box'></div>
+		<table class='list_table' border="2">
+			<tr>
+				<th>È¸¿ø ¾ÆÀÌµğ</th>
+				<th>È¸¿ø ÀÌ¸§</th>
+				<th>È¸¿ø ÀüÈ­¹øÈ£</th>
+				<th>È¸¿ø ÁÖ¼Ò</th>
+				<th>È¸¿ø ÀÌ¸ŞÀÏ</th>
+				<th>È£ÅÚ ¾ÆÀÌµğ</th>
+				<th></th>
+			</tr>
 
-        </table>
+			<tr v-for="member in info">
+				<td v-html="member.id"></td>
+				<td v-html="member.name"></td>
+				<td v-html="member.phone"></td>
+				<td v-html="member.address"></td>
+				<td v-html="member.email"></td>
+				<td v-html="member.hotel_id"></td>
+				<td><input type="button" name="delete" value="È¸¿ø »èÁ¦"
+					@click="deleteMember(member.id)"></td>
+			</tr>
 
-    </div>
-    <script>
-        new Vue({
-            el: '#app',
-            data() {
-                return {
-                    info: [],
-                    loading: true,
-                    errored: false,
-                    cid: '',
-                    cpassword: '',
-                    cname: '',
-                    cphone: '',
-                    caddress: '',
-                    cemail: '',
-                    chotel_id: '',
-                    cmemberid: ''
-                }
-            }, //data
-            mounted() {
-                axios
-                    .get("http://localhost:8888/api/findAllMember")
-                    .then(response => (this.info = response.data))
-                    .catch(error => {
-                        console.log(error);
-                        this.errored = true;
-                    })
-                    .finally(() => this.loading = false)
-            },
-            methods: {
-                deleteMember(memberId) {
-                    axios
-                        .delete("http://localhost:8888/api/deleteMember/" + memberId)
-                        .then(response => {
-                            alert(response.data)
-                        })
-                        .catch(error => {
-                            console.log(error);
-                            this.errored = true;
-                        })
-                        .finally(function() {
-                            this.loading = false
-                            location.href = "./admin_allmember.html"
-                        })
-                }
-            }
-        });
-    </script>
+		</table>
+
+	</div>
+	<script>
+new Vue({
+	el:'#app',
+	data() {
+		return {
+			info : [],
+			loading : true,
+			errored : false,
+			cid : '',
+			cpassword : '',
+			cname : '',
+			cphone : '',
+			caddress : '',
+			cemail : '',
+			chotel_id : '',
+			cmemberid : ''
+		}
+	},//data
+	mounted(){
+		this.retrieveMembers();
+	},
+	methods: {
+		retrieveMembers() {
+			axios
+			.get("http://localhost:8888/findAllMember")
+			.then(response => (this.info = response.data))
+			.catch(error =>{
+				console.log(error);
+				this.errored=true;
+			})
+			.finally(()=>this.loading =false)
+		},
+		deleteMember(memberId) {
+			axios
+			.delete("http://localhost:8888/deleteMember/" + memberId)
+			.then(response => {
+				this.retrieveMembers();
+			})
+			.catch(error =>{
+				console.log(error);
+				this.errored=true;
+			})
+			.finally(function() {
+				this.loading=false
+			})
+		}
+	}
+});
+</script>
 </body>
-
 </html>

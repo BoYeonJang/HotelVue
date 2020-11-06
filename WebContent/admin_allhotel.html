@@ -1,13 +1,158 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<meta charset="EUC-KR">
+<title>관리자 My Page</title>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
-<body>
+<style>
+table.hotel_table {
+	border-collapse: collapse;
+	text-align: left;
+	line-height: 1.5;
+	text-align: center;
+	width: 80%;
+	margin: auto;
+	font-family: Georgia, "Malgun Gothic", serif;
+}
 
+table.hotel_table thead th {
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	color: #369;
+	border-bottom: 3px solid #036;
+}
+
+table.hotel_table tbody th {
+	width: 150px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+	background: #f3f6f7;
+}
+
+table.hotel_table td {
+	width: 350px;
+	padding: 10px;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+}
+</style>
+<body>
+	<div id='app'>
+		<div class='headtitle'>
+			<h2>호텔 리스트</h2>
+		</div>
+		<div>
+			<input type="button" name="hotel_management" value="호텔 관리"
+				@click="pageConversion(1)"> <input type="button"
+				name="hotel_admission" value="호텔 승인" @click="pageConversion(0)">
+			<p>
+		</div>
+		<div>
+			<table class='hotel_table' border="2">
+				<tr>
+					<th>아이디</th>
+					<th>이름</th>
+					<th>주소</th>
+					<th>이미지</th>
+					<th>상세설명</th>
+					<th></th>
+					<th></th>
+				</tr>
+
+				<tr v-for="hotel in info"
+					v-if="hotel.approved == '1' & approved == '1'">
+					<td v-html="hotel.id"></td>
+					<td v-html="hotel.name"></td>
+					<td v-html="hotel.location"></td>
+					<td v-html="hotel.img"></td>
+					<td v-html="hotel.description"></td>
+					<td>비고</td>
+					<td><input type="button" name="hotel_delete" value="호텔 삭제"
+						@click="deleteHotel(hotel.id)"></td>
+
+				</tr>
+				<tr v-for="hotel in info"
+					v-if="hotel.approved == '0' & approved == '0'">
+					<td v-html="hotel.id"></td>
+					<td v-html="hotel.name"></td>
+					<td v-html="hotel.location"></td>
+					<td v-html="hotel.img"></td>
+					<td v-html="hotel.description"></td>
+					<td><input type="button" name="hotel_accept" value="호텔 승인"
+						@click="acceptHotel(hotel)"></td>
+					<td><input type="button" name="hotel_delete" value="승인 거부"
+						@click="deleteHotel(hotel.id)"></td>
+				</tr>
+			</table>
+		</div>
+
+	</div>
+	<script>
+new Vue({
+	el:'#app',
+	data() {
+		return {
+			info : [],
+			loading : true,
+			errored : false,
+			approved : 0
+		}
+	},//data
+	mounted(){
+		this.retrieveHotels();
+	},
+	methods: {
+		retrieveHotels() {
+			axios
+			.get("http://localhost:8888/findAllHotel")
+			.then(response => (this.info = response.data))
+			.catch(error =>{
+				console.log(error);
+				this.errored=true;
+			})
+			.finally(()=>this.loading =false)
+		},
+		deleteHotel(hotelId) {
+			axios
+			.delete("http://localhost:8888/deleteHotel/" + hotelId)
+			.then(response => {
+				this.retrieveHotels();
+			})
+			.catch(error =>{
+				console.log(error);
+				this.errored=true;
+			})
+			.finally(function() {
+				this.loading=false
+			})
+		},
+		acceptHotel(hotel) {
+			hotel.approved = 1
+			axios
+			.put("http://localhost:8888/updateHotel/", hotel)
+			.then(response => {
+			})
+			.catch(error =>{
+				console.log(error);
+				this.errored=true;
+			})
+			.finally(function() {
+				this.loading=false
+
+			})
+		},
+		pageConversion(approved) {
+			if (approved == 1) this.approved = 1;
+			else this.approved = 0;
+		}
+	}
+});
+</script>
 </body>
 </html>

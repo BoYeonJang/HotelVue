@@ -6,50 +6,115 @@
     <title>Insert title here</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <link rel="stylesheet" href="./css/header.css">
 </head>
 
 <body>
     <div id="app">
-        <form action="#">
-            <div>
-                <table>
-                    <tr>
-                        <th>3단계: 결제</th>
-                    </tr>
-                </table>
-                <b>성</b> 영문으로 입력해주세요.<br> <input type="text">
-                <p>
-                    <b>이름</b> 영문으로 입력해주세요.<br> <input type="text">
-                    <p>
-                        <b>카드 종류</b> 영문으로 입력해주세요.<br> <select>
+        <header>
+            <div class="nav">
+                <ul v-if="empty">
+                    <li class="hotel">
+                        <a href="./index.html">
+                            <img src="./img/title/hotelcombine.com.png">
+                        </a>
+                    </li>
+                    <li class="login" style=" float:right">
+                        <a href="./login_member.html">로그인</a>
+                    </li>
+                    <li class="login" style="float:right"><a href="./register_member.html">회원가입</a></li>
+                </ul>
+                <ul v-else>
+                    <li class="hotel">
+                        <a href="./index.html">
+                            <img src="./img/title/hotelcombine.com.png">
+                        </a>
+                    </li>
+                    <li class="logout" style="float:right" :click="logout">
+                        <a href="./index.html" @click="logout()">로그아웃</a>
+                    </li>
+                    </li>
+                    <li class="logout" style="float:right"><a href="./member_mypage.html">마이페이지</a></li>
+                </ul>
+            </div>
+        </header>
+        <div>
+            <table>
+                <tr>
+                    <th>3단계: 결제</th>
+                </tr>
+            </table>
+            <b>이름</b> 영문으로 입력해주세요.<br> <input type="text">
+            <p>
+                <b>카드 종류</b> 영문으로 입력해주세요.<br> <select>
 						<option value="">카드 종류</option>
 						<option value="Visa">Visa</option>
 						<option value="Mastercard">Mastercard</option>
 						<option value="American Express">American Express</option>
 					</select>
-                        <p>
-                            <b>카드 번호</b><br> <input type="text" placeholder="0000 0000 0000 0000">
-                            <p>
-                                <b>만료 일자</b><br> <input type="text" placeholder="월" style="width: 30px;"> <b>/</b> <input type="text" placeholder="연도" style="width: 30px;">
-                                <p>
-                                    <b>보안 코드</b><br> <input type="text" placeholder="000" style="width: 40px;">
-                                    <p>
-            </div>
-            <div style="float: right;">
-                <b>이 호텔에서는 다음의 결제 방법을 지원합니다.</b><br> <img alt="지원하는 카드" src="./image/card.png">
-            </div>
-            <div>
-                <hr>
-                <b>예약 확인</b><br> “예약” 버튼을 클릭하면 이용약관 및 개인정보 보호정책 과 외교부 해외안전여행 을 읽었고 이에 동의하시는 것으로 간주됩니다. <br> <input type="checkbox">동의함
                 <p>
-                    <input type="submit" value="예약 완료">
-            </div>
-        </form>
+                    <b>카드 번호</b><br> <input type="text" placeholder="0000 0000 0000 0000" maxlength="19" v-model="cn">
+                    <p>
+                        <b>만료 일자</b><br> <input type="text" placeholder="월" style="width: 30px;" maxlength="2"> <b>/</b> <input type="text" placeholder="연도" style="width: 30px;" maxlength="2">
+                        <p>
+                            <b>보안 코드</b><br> <input type="text" placeholder="000" style="width: 40px;" maxlength="3">
+                            <p>
+        </div>
+        <div style="float: right;">
+            <b>이 호텔에서는 다음의 결제 방법을 지원합니다.</b><br> <img alt="지원하는 카드" src="./img/card.png">
+        </div>
+        <div>
+            <hr>
+            <b>예약 확인</b><br> “예약” 버튼을 클릭하면 이용약관 및 개인정보 보호정책 과 외교부 해외안전여행 을 읽었고 이에 동의하시는 것으로 간주됩니다. <br> <input type="checkbox">동의함
+            <p>
+                <button @click="add(room.id)">예약 완료</button>
+        </div>
     </div>
     <script>
         var app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    room: [],
+                    trash : '',
+                    loading: true,
+                    errored: false,
+                    cn : '',
+                    id: sessionStorage.getItem("mineSession"),
+                    empty : localStorage.getItem('loginId') == null
+                }
+            },
+            mounted() {
+                axios.get("http://127.0.0.1:8888/findRoomById/" + this.id)
+                    .then(response => (this.room = response.data)).catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    }).finally(() => this.loading = false)
+            },
+            methods: {
+                add(id) {
+                    location.href = "./member_res_check.html";
+                    axios.post("http://127.0.0.1:8888/addReservation", {
+                        memberId: localStorage.getItem('loginId'),
+                        roomId: sessionStorage.getItem('hotel'),
+                        checkin: sessionStorage.getItem('checkin'),
+                        checkout: sessionStorage.getItem('checkout'),
+                        guestNumber: sessionStorage.getItem('limit'),
+                        cardNumber: this.cn
+                    })
+                    .then(response => (this.trash = response.data)).catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    }).finally(() => this.loading = false)
+		
+                },
+                logout() {
+                    localStorage.removeItem("loginId")
 
-        })
+                    location.href = './index.html'
+                }
+            }
+        });
     </script>
 </body>
 

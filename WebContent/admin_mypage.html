@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="EUC-KR">
-    <title>ê´€ë¦¬ì My Page</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<meta charset="EUC-KR">
+<title>°ü¸®ÀÚ My Page</title>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 
 <body>
-    <div id="app">
-        <div v-if="admin.id == 'admin' ">
-            <div id="member">
-                <a href="./admin_allmember.html">ëª¨ë“  íšŒì› ë³´ê¸°</a>
+	<div id="app">
+		<div v-if="admin.id == 'admin' ">
+			<div id="member">
+				<a href="./admin_allmember.html">¸ğµç È¸¿ø º¸±â</a>
 
-            </div>
-            <div id="hotel">
-                <a href="./admin_allhotel.html">ëª¨ë“  í˜¸í…” ë³´ê¸°</a>
-            </div>
-        </div>
-        <div v-else>
-            ê´€ë¦¬ìê°€ ì•„ë‹™ë‹ˆë‹¤... Your not admin
-        </div>
-    </div>
-    <script>
+			</div>
+			<div id="hotel">
+				<a href="./admin_allhotel.html">¸ğµç È£ÅÚ º¸±â</a>
+			</div>
+		</div>
+		<div v-else>°ü¸®ÀÚ°¡ ¾Æ´Õ´Ï´Ù... Your not admin</div>
+	</div>
+	<script>
         var admin = JSON.parse(localStorage.getItem('loginId'))
         var app = new Vue({
             el: '#app',
@@ -33,5 +31,4 @@
         });
     </script>
 </body>
-
 </html>

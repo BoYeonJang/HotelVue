@@ -6,13 +6,42 @@
     <title>Insert title here</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <link rel="stylesheet" href="./css/header.css">
 </head>
 
 <body>
     <div id='app'>
+        <header>
+            <div class="nav">
+                <ul v-if="empty">
+                    <li class="hotel">
+                        <a href="./index.html">
+                            <img src="./img/title/hotelcombine.com.png">
+                        </a>
+                    </li>
+                    <li class="login" style=" float:right">
+                        <a href="./login_member.html">로그인</a>
+                    </li>
+                    <li class="login" style="float:right"><a href="./register_member.html">회원가입</a></li>
+                </ul>
+                <ul v-else>
+                    <li class="hotel">
+                        <a href="./index.html">
+                            <img src="./img/title/hotelcombine.com.png">
+                        </a>
+                    </li>
+                    <li class="logout" style="float:right" :click="logout">
+                        <a href="./index.html" @click="logout()">로그아웃</a>
+                    </li>
+                    </li>
+                    <li class="logout" style="float:right"><a href="./member_mypage.html">마이페이지</a></li>
+                </ul>
+            </div>
+        </header>
         <div>
             <table>
                 <tbody v-for="r in room">
+
                     <tr>
                         <td>{{r.name}}</td>
                     </tr>
@@ -21,6 +50,7 @@
                     </tr>
                     <tr>
                         <td>{{r.price}}</td>
+                        <td><button @click="add(r.id)">선택</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -34,19 +64,47 @@
                     room: [],
                     loading: true,
                     errored: false,
-                    id: sessionStorage.getItem("mineSession")
+                    empty: localStorage.getItem('loginId') == null,
+                    hotel: sessionStorage.getItem("hotel"),
+                    checkin: sessionStorage.getItem("checkin"),
+                    checkout: sessionStorage.getItem("checkout"),
+                    limit: sessionStorage.getItem("limit")
+
                 }
 
             }, //data
             mounted() {
                 axios
-                    .get("http://127.0.0.1:8888/findRoomByHotelId/" + this.id)
-                    .then(response => (this.room = response.data))
+                    .post('http://127.0.0.1:8888/findAllOptionApply', {
+                        hotel: this.hotel,
+                        checkin: this.checkin,
+                        checkout: this.checkout,
+                        limit: this.limit
+
+                    })
+
+                .then(response => (this.room = response.data))
                     .catch(error => {
                         console.log(error);
                         this.errored = true;
+                        console.log(this.limit);
                     })
-                    .finally(() => this.loading = false)
+                    .finally(() => {
+
+                        this.loading = false;
+                        console.log(this.room);
+                    })
+            },
+            methods: {
+                add(id) {
+                    location.href = "./reservation_form.html";
+                    sessionStorage.setItem("hotel", id); //
+                },
+                logout() {
+                    localStorage.removeItem("loginId");
+                    localStorage.removeItem("login")
+                    location.href = './index.html';
+                }
             }
         });
     </script>

@@ -6,95 +6,125 @@
     <title>Insert title here</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/loader.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/footer.css">
 </head>
 
 <body>
     <div id='app'>
         <header>
             <div class="nav">
-                <ul v-if="MemberEmpty">
-                    <li class="hotel"><a href="./index.html">Premium</a></li>
-                    <li class="login" style=" float:right "><a href="login_member.html">로그인</a></li>
-                    <li style="float:right "><a href="# ">회원가입</a></li>
+                <ul v-if="empty">
+                    <li class="hotel">
+                        <a href="./index.html"> <img src="./img/title/hotelcombine.com.png">
+                        </a>
+                    </li>
+                    <li class="login" style="float: right"><a href="./login_member.html">로그인</a></li>
+                    <li class="login" style="float: right"><a href="./register_member.html">회원가입</a></li>
                 </ul>
                 <ul v-else>
-                    <li class="hotel "><a href="./index.html">Premium</a></li>
-                    <li class="logout" style=" float:right" :click="logout">
-                        <a href="./index.html" @click="logout">로그아웃</a>
+                    <li class="hotel">
+                        <a href="./index.html"> <img src="./img/title/hotelcombine.com.png">
+                        </a>
                     </li>
-                    </li>
-                    <li style="float:right "><a href="member_mypage.html">마이페이지</a></li>
+                    <li class="logout" style="float: right" :click="logout"><a href="./index.html" @click="logout()">로그아웃</a></li>
+                    <li class="logout" style="float: right"><a href="./member_mypage.html">마이페이지</a></li>
                 </ul>
             </div>
         </header>
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>어디로 떠나고 싶으세요?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text "></td>
-                    </tr>
-                    <tr>
-                        <td>목적지 혹은 숙박 시설 이름을 입력하세요.</td>
-                    </tr>
-                    <tr>
-                        <td>체크인</td>
-                        <td>체크아웃</td>
-                    </tr>
-                    <tr>
-                        <td><input type="date "></td>
-                        <td><input type="date "></td>
-                    </tr>
-                    <tr>
-                        <td>객실</td>
-                        <td>인원</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <!-- 나중에 for문으로 10까지 루프 돌리기 --><select name=guestroom>
-								<option value="1 " selected="selected ">1</option>
-								<option value="2 ">2</option>
-								<option value="3 ">3</option>
-								<option value="3 ">4</option>
-								<option value="3 ">5</option>
-						</select>
-                        </td>
-                        <td>
-                            <!-- 나중에 for문으로 10까지 루프 돌리기 --><select name="personnel ">
-								<option value="1 ">1</option>
-								<option value="2 " selected="selected ">2</option>
-								<option value="3 ">3</option>
-								<option value="3 ">4</option>
-								<option value="3 ">5</option>
-						</select>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td>
-                            <button type="button ">검색</button>
-                        </td>
-                        <tr>
-                </tfoot>
-            </table>
+        <div class="loader">
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='window'></div>
+            <div class='door'></div>
+            <div class='hotel-sign'>
+                <span>H</span> <span>O</span> <span>T</span> <span>E</span> <span>L</span>
+            </div>
         </div>
+        <div>
+            <table class="tour">
+                <tr>
+                    <th colspan="4" class="travel">어디로 떠나고 싶으세요?</th>
+                </tr>
+                <tr>
+                    <td><input type="text" v-model="city" class="city" placeholder="예) 서울, 미국"></td>
+                    <td><input type="date" v-model="checkin" class="checkin" date-placeholder="체크인" required aria-required="true" required pattern="\d{2}-\d{2}"></td>
+                    <td><input type="date" v-model="checkout" class="checkout" date-placeholder="체크아웃" required aria-required="true" required pattern="\d{2}-\d{2}"></td>
+                    <td>
+                        <select name="personnel" v-model="human" class="human">
+							<option value="">인원</option>
+							<option value="1">1</option>
+							<option value="2" selected="selected">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <button type="button" class="button" @click="select(city,checkin,checkout,human)">검색</button>
+                    </td>
+                    <tr>
+            </table>
+            <div class="container" align="center">
+                <canvas id="myChart" width="500" height="200" style="width: 500; height: 200"></canvas>
+            </div>
+        </div>
+        <footer>
+            <div class="footer">
+                <ul>
+                    <li><a href="/ShoppingMall/index.jsp">팀 소개</a></li>
+                    <li><a href="https://github.com/BoYeonJang/Hotel">Back-End 깃 주소</a></li>
+                    <li><a href="https://github.com/BoYeonJang/Hotel">Front-end 깃 주소</a></li><br>
+                    <li>
+                        <a href="./index.html"><img src="./img/title/hotelcombine.com.png"></a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
     </div>
     <script>
         var app = new Vue({
                 el: '#app',
                 data: {
-                    MemberEmpty: localStorage.getItem('ss'),
+                	empty: localStorage.getItem('loginId') == null,
+                    city: '',
+                    checkin: '',
+                    checkout: '',
+                    human: '',
                     loading: true,
                     errored: false
+
                 },
                 mounted() {
                     let login = localStorage.getItem("loginId");
+                    console.log(this.MemberEmpty);
                     if (login != null) {
                         this.MemberEmpty = false;
                     }
@@ -102,12 +132,36 @@
                 }, // mounted,
                 methods: {
                     logout() {
-                        localStorage.removeItem("loginId")
-
-                        location.href = './index.html'
+                        localStorage.removeItem("loginId");
+                        localStorage.removeItem('login');
+                        location.href = './index.html';
+                    },
+                    select(city, checkin, checkout, human) {
+                        location.href = "./hotel_list.html";
+                        sessionStorage.setItem("city", city);
+                        sessionStorage.setItem("checkin", checkin);
+                        sessionStorage.setItem("checkout", checkout);
+                        sessionStorage.setItem("limit", human);
                     }
                 },
             }) // Vue
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'], //마지막 예약 날짜에서부터 1주일 전
+                datasets: [{
+                    label: 'Number of reservations',
+                    backgroundColor: 'transparent',
+                    borderColor: 'red',
+                    data: [10, 10, 15, 2, 20, 30, 60] //예약한 날짜 건수
+                }]
+            },
+            // 옵션
+            options: {
+                responsive: false, //canvas 사이즈 조절시 필요
+            }
+        });
     </script>
 </body>
 
