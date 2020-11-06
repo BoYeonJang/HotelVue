@@ -7,6 +7,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <link rel="stylesheet" href="./css/header.css">
+<link rel="stylesheet" href="./css/footer.css">
 </head>
 
 <body>
@@ -35,48 +36,63 @@
 		</header>
 		<form action="#" method="POST" name="registForm" id="registForm"
 			@submit.prevent="registMember">
-			<table>
-				<tbody>
-					<tr>
-						<td>회원가입</td>
-					</tr>
-					<tr>
-						<td>아이디</td>
-						<td><input type="text" name="id" id="id" v-model="cid"></td>
-					</tr>
-					<tr>
-						<td>비밀번호</td>
-						<td><input type="password" name="password" id="password"
-							v-model="cpassword"></td>
-					</tr>
-					<tr>
-						<td>이름</td>
-						<td><input type="text" name="name" id="name" v-model="cname"></td>
-					</tr>
-					<tr>
-						<td>핸드폰 번호</td>
-						<td><input type="text" name="phone" id="phone"
-							v-model="cphone"></td>
-					</tr>
-					<tr>
-						<td>주소</td>
-						<td><input type="text" name="address" id="address"
-							v-model="caddress"></td>
-					</tr>
-					<tr>
-						<td>이메일</td>
-						<td><input type="text" name="email" id="email"
-							v-model="cemail"></td>
-					</tr>
-					<tr>
-						<td>호텔 아이디</td>
-						<td><input type="text" name="hotelId" id="hotelId"
-							v-model="chotel_id"></td>
-					</tr>
-				</tbody>
+			<table border="1">
+				<tr>
+					<td>회원가입</td>
+				</tr>
+				<tr>
+					<td>아이디</td>
+					<td><input type="text" name="id" id="id" v-model="cid"></td>
+				</tr>
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="password" name="password" id="password"
+						v-model="cpassword"></td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" name="name" id="name" v-model="cname"></td>
+				</tr>
+				<tr>
+					<td>핸드폰 번호</td>
+					<td><input type="text" name="phone" id="phone"
+						v-model="cphone"></td>
+				</tr>
+				<tr>
+					<td>주소</td>
+					<td><input type="text" name="address" id="address"
+						v-model="caddress"></td>
+				</tr>
+				<tr>
+					<td>이메일</td>
+					<td><input type="text" name="email" id="email"
+						v-model="cemail"></td>
+				</tr>
+				<tr>
+					<td>호텔 아이디</td>
+					<td><input type="text" name="hotelId" id="hotelId"
+						v-model="chotel_id"></td>
+				</tr>
 			</table>
 			<button type="submit" name="button">회원 가입</button>
 		</form>
+		<footer>
+			<div class="footer">
+				<table>
+					<tr>
+						<td><a href="#">팀 소개</a></td>
+						<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
+								깃 주소</a></td>
+						<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
+								깃 주소</a></td>
+					</tr>
+					<tr class="footer_img_center">
+						<td colspan="3"><a href="./index.html"><img
+								src="./img/title/hotelcombine.com.png"></a></td>
+					</tr>
+				</table>
+			</div>
+		</footer>
 	</div>
 	<script>
         var app = new Vue({

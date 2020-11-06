@@ -9,6 +9,7 @@
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="./css/mypage.css">
+<link rel="stylesheet" href="./css/footer.css">
 <link rel="stylesheet" href="./css/header.css">
 </head>
 <body>
@@ -68,102 +69,117 @@
 				</template> </template> </template> </template>
 			</tbody>
 		</table>
+		<footer>
+			<div class="footer">
+				<table>
+					<tr>
+						<td><a href="#">팀 소개</a></td>
+						<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
+								깃 주소</a></td>
+						<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
+								깃 주소</a></td>
+					</tr>
+					<tr class="footer_img_center">
+						<td colspan="3"><a href="./index.html"><img
+								src="./img/title/hotelcombine.com.png"></a></td>
+					</tr>
+				</table>
+			</div>
+		</footer>
 	</div>
 	<script>
-
-
-var app = new Vue({
-	el:'#app',
-	data() {
-		return {
-			reservations : [],
-			loading : true,
-			errored : false,
-			member : {},
-			hotels : [],
-			rooms : [],
-			empty : localStorage.getItem('loginId') == null
-		}
-	},//data
-	mounted(){
-		this.initMember();
-	},
-	methods: {
-		initMember() {
-			axios
-			.get("http://localhost:8888/findMemberById/" + localStorage.getItem('loginId'))
-			.then(response => {
-				this.member = response.data;
-				this.retrieveReservations();
-				this.retrieveHotels();
-				this.retrieveRooms();
-			})
-			.catch(error =>{
-				console.log(error);
-				this.errored=true;
-			})
-			.finally(()=> this.loading =false)
-		},
-		retrieveReservations() {
-			axios
-			.get("http://localhost:8888/findReservationByMemberId/" + this.member.id)
-			.then(response => (this.reservations = response.data))
-			.catch(error =>{
-				console.log(error);
-				this.errored=true;
-			})
-			.finally(()=>this.loading =false)
-		},
-		retrieveHotels() {
-			axios
-			.get("http://localhost:8888/findAllHotel")
-			.then(response => (this.hotels = response.data))
-			.catch(error =>{
-				console.log(error);
-				this.errored=true;
-			})
-			.finally(()=>this.loading =false)
-		},
-		retrieveRooms() {
-			axios
-			.get("http://localhost:8888/findAllRoom")
-			.then(response => (this.rooms = response.data))
-			.catch(error =>{
-				console.log(error);
-				this.errored=true;
-			})
-			.finally(()=>this.loading =false)
-		},//retrieveRooms
-		deleteReservation(reservationId) {
-			axios
-			.delete("http://localhost:8888/deleteReservation/" + reservationId)
-			.then(response => {
-				this.retrieveReservations();
-				this.retrieveHotels();
-				this.retrieveRooms();
-			})
-			.catch(error =>{
-				console.log(error);
-				this.errored=true;
-			})
-			.finally(()=>this.loading =false)
-		},
-		reservationDetail(reservationId) {
-			var url = 'http://localhost:7777/HotelVue/reservation_detail.html';
-			localStorage.setItem("rId",reservationId);
-			$(location).attr('href',url);
-		},
-    	logout() {
-            localStorage.removeItem("loginId")
-            localStorage.removeItem('hId');
-            location.href = './index.html'
-        },
-        addReview(reservationId) {
-        	localStorage.setItem("reservationReview", reservationId)
-        	location.href = './star_rating.html'
-        }
-	}
-});
+		var app = new Vue({
+			el:'#app',
+			data() {
+				return {
+					reservations : [],
+					loading : true,
+					errored : false,
+					member : {},
+					hotels : [],
+					rooms : [],
+					empty : localStorage.getItem('loginId') == null
+				}
+			},//data
+			mounted(){
+				this.initMember();
+			},
+			methods: {
+				initMember() {
+					axios
+					.get("http://localhost:8888/findMemberById/" + localStorage.getItem('loginId'))
+					.then(response => {
+						this.member = response.data;
+						this.retrieveReservations();
+						this.retrieveHotels();
+						this.retrieveRooms();
+					})
+					.catch(error =>{
+						console.log(error);
+						this.errored=true;
+					})
+					.finally(()=> this.loading =false)
+				},
+				retrieveReservations() {
+					axios
+					.get("http://localhost:8888/findReservationByMemberId/" + this.member.id)
+					.then(response => (this.reservations = response.data))
+					.catch(error =>{
+						console.log(error);
+						this.errored=true;
+					})
+					.finally(()=>this.loading =false)
+				},
+				retrieveHotels() {
+					axios
+					.get("http://localhost:8888/findAllHotel")
+					.then(response => (this.hotels = response.data))
+					.catch(error =>{
+						console.log(error);
+						this.errored=true;
+					})
+					.finally(()=>this.loading =false)
+				},
+				retrieveRooms() {
+					axios
+					.get("http://localhost:8888/findAllRoom")
+					.then(response => (this.rooms = response.data))
+					.catch(error =>{
+						console.log(error);
+						this.errored=true;
+					})
+					.finally(()=>this.loading =false)
+				},//retrieveRooms
+				deleteReservation(reservationId) {
+					axios
+					.delete("http://localhost:8888/deleteReservation/" + reservationId)
+					.then(response => {
+						this.retrieveReservations();
+						this.retrieveHotels();
+						this.retrieveRooms();
+					})
+					.catch(error =>{
+						console.log(error);
+						this.errored=true;
+					})
+					.finally(()=>this.loading =false)
+				},
+				reservationDetail(reservationId) {
+					var url = 'http://localhost:7777/HotelVue/reservation_detail.html';
+					localStorage.setItem("rId",reservationId);
+					$(location).attr('href',url);
+				},
+		    	logout() {
+		            localStorage.removeItem("loginId")
+		            localStorage.removeItem('hId');
+		            location.href = './index.html'
+		        },
+		        addReview(reservationId) {
+		        	localStorage.setItem("reservationReview", reservationId)
+		        	location.href = './star_rating.html'
+		        }
+			}
+		});
 </script>
 </body>
 </html>

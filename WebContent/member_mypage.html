@@ -2,86 +2,93 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <link rel="stylesheet" href="./css/mypage.css">
-    <link rel="stylesheet" href="./css/header.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<link rel="stylesheet" href="./css/mypage.css">
+<link rel="stylesheet" href="./css/header.css">
+<link rel="stylesheet" href="./css/footer.css">
 </head>
 <style>
-    a {
-        text-decoration: none;
-        color: #000000;
-    }
+a {
+	text-decoration: none;
+	color: #000000;
+}
 </style>
 
 <body>
-    <div id="main">
-        <header>
-            <div class="nav">
-                <ul v-if="empty">
-                    <li class="hotel">
-                        <a href="./index.html"> <img src="./img/title/hotelcombine.com.png">
-                        </a>
-                    </li>
-                    <li class="login" style="float: right"><a href="./login_member.html">로그인</a></li>
-                    <li class="login" style="float: right"><a href="./register_member.html">회원가입</a></li>
-                </ul>
-                <ul v-else>
-                    <li class="hotel">
-                        <a href="./index.html"> <img src="./img/title/hotelcombine.com.png">
-                        </a>
-                    </li>
-                    <li class="logout" style="float: right" :click="logout"><a href="./index.html" @click="logout()">로그아웃</a></li>
-                    <li class="logout" style="float: right"><a href="./member_mypage.html">마이페이지</a></li>
-                </ul>
-            </div>
-        </header>
-        <h3 align="center" class="mypage">MY PAGE</h3>
-        <div class="header">
-            <div class="thumb-wrapper">
-                <img class="thumb" src="img/user-thumb.png" />
-            </div>
+	<div id="main">
+		<header>
+			<div class="nav">
+				<ul v-if="empty">
+					<li class="hotel"><a href="./index.html"> <img
+							src="./img/title/hotelcombine.com.png">
+					</a></li>
+					<li class="login" style="float: right"><a
+						href="./login_member.html">로그인</a></li>
+					<li class="login" style="float: right"><a
+						href="./register_member.html">회원가입</a></li>
+				</ul>
+				<ul v-else>
+					<li class="hotel"><a href="./index.html"> <img
+							src="./img/title/hotelcombine.com.png">
+					</a></li>
+					<li class="logout" style="float: right" :click="logout"><a
+						href="./index.html" @click="logout()">로그아웃</a></li>
+					<li class="logout" style="float: right"><a
+						href="./member_mypage.html">마이페이지</a></li>
+				</ul>
+			</div>
+		</header>
+		<h3 align="center" class="mypage">MY PAGE</h3>
+		<div class="header">
+			<div class="thumb-wrapper">
+				<img class="thumb" src="img/user-thumb.png" />
+			</div>
 
-            <div class="text-area">
-                <h2 class="greeting">Hi, {{member.name}}</h2>
-                <div class="desc">
-                    We’ll make a mobile magazine <br /> using html, css only.
-                </div>
-            </div>
+			<div class="text-area">
+				<h2 class="greeting">Hi, {{member.name}}</h2>
+				<div class="desc">
+					We’ll make a mobile magazine <br /> using html, css only.
+				</div>
+			</div>
 
-            <div class="mail mouse-effect">
-                <a href="mailto:anjihhg@gmail.com">{{member.email}}</a>
-            </div>
-        </div>
+			<div class="mail mouse-effect">
+				<a href="mailto:anjihhg@gmail.com">{{member.email}}</a>
+			</div>
+		</div>
 
-        <ul class="list ">
-            <li class="item mouse-effect" v-if="member.id != 'admin' & member.hotelId == null">
-                <div class="left">
-                    <a href="member_update.html"><img src="img/icon/account.svg"></a>
-                    <div class="name">
-                        <a href="member_update.html ">개인정보 수정</a>
-                    </div>
-                </div>
-                <div class="right">
-                    <img src="img/icon/right_arrow.svg" />
-                </div>
-            </li>
+		<ul class="list ">
+			<li class="item mouse-effect"
+				v-if="member.id != 'admin' & member.hotelId == null">
+				<div class="left">
+					<a href="member_update.html"><img src="img/icon/account.svg"></a>
+					<div class="name">
+						<a href="member_update.html ">개인정보 수정</a>
+					</div>
+				</div>
+				<div class="right">
+					<img src="img/icon/right_arrow.svg" />
+				</div>
+			</li>
 
-            <li class="item mouse-effect" v-if="member.id != 'admin' & member.hotelId == null">
-                <div class="left ">
-                    <a href="member_res_check.html"><img src="img/icon/business.svg" /></a>
-                    <div class="name">
-                        <a href="member_res_check.html">예약내역 확인</a>
-                    </div>
-                </div>
-                <div class="right">
-                    <img src="img/icon/right_arrow.svg" />
-                </div>
-            </li>
+			<li class="item mouse-effect"
+				v-if="member.id != 'admin' & member.hotelId == null">
+				<div class="left ">
+					<a href="member_res_check.html"><img
+						src="img/icon/business.svg" /></a>
+					<div class="name">
+						<a href="member_res_check.html">예약내역 확인</a>
+					</div>
+				</div>
+				<div class="right">
+					<img src="img/icon/right_arrow.svg" />
+				</div>
+			</li>
 
-            <!-- <li class="item mouse-effect ">
+			<!-- <li class="item mouse-effect ">
 	            <div class="left ">
 	                <a href="member_mark.html "><img src="img/icon/bookmark.svg " /></a>
 	                <div class="name ">즐겨찾기 내역</div>
@@ -91,58 +98,78 @@
 	            </div>
 	        </li> -->
 
-            <li class="item mouse-effect" v-if="member.id != 'admin' & member.hotelId != null">
-                <div class="left">
-                    <a href="seller_res_check.html"><img src="img/icon/account.svg"></a>
-                    <div class="name">
-                        <a @click="sellerReservationCheck(hotelId)">고객 예약 확인 및 취소</a>
-                    </div>
-                </div>
-                <div class="right">
-                    <img src="img/icon/right_arrow.svg" />
-                </div>
-            </li>
+			<li class="item mouse-effect"
+				v-if="member.id != 'admin' & member.hotelId != null">
+				<div class="left">
+					<a href="seller_res_check.html"><img src="img/icon/account.svg"></a>
+					<div class="name">
+						<a @click="sellerReservationCheck(hotelId)">고객 예약 확인 및 취소</a>
+					</div>
+				</div>
+				<div class="right">
+					<img src="img/icon/right_arrow.svg" />
+				</div>
+			</li>
 
-            <li class="item mouse-effect" v-if="member.id != 'admin' & member.hotelId != null">
-                <div class="left">
-                    <a href="seller_detail_update.html"><img src="img/icon/business.svg" /></a>
-                    <div class="name">
-                        <a href="seller_detail_update.html">호텔 정보 수정</a>
-                    </div>
-                </div>
-                <div class="right">
-                    <img src="img/icon/right_arrow.svg" />
-                </div>
-            </li>
-
-
-            <li class="item mouse-effect" v-if="member.id == 'admin'">
-                <div class="left">
-                    <a href="admin_allmember.html"><img src="img/icon/bookmark.svg" /></a>
-                    <div class="name">
-                        <a href="admin_allmember.html">모든 회원 관리</a>
-                    </div>
-                </div>
-                <div class="right">
-                    <img src="img/icon/right_arrow.svg" />
-                </div>
-            </li>
+			<li class="item mouse-effect"
+				v-if="member.id != 'admin' & member.hotelId != null">
+				<div class="left">
+					<a href="seller_detail_update.html"><img
+						src="img/icon/business.svg" /></a>
+					<div class="name">
+						<a href="seller_detail_update.html">호텔 정보 수정</a>
+					</div>
+				</div>
+				<div class="right">
+					<img src="img/icon/right_arrow.svg" />
+				</div>
+			</li>
 
 
-            <li class="item mouse-effect" v-if="member.id == 'admin'">
-                <div class="left">
-                    <a href="admin_allhotel.html"><img src="img/icon/bookmark.svg" /></a>
-                    <div class="name">
-                        <a href="admin_allhotel.html">모든 호텔 관리</a>
-                    </div>
-                </div>
-                <div class="right">
-                    <img src="img/icon/right_arrow.svg" />
-                </div>
-            </li>
-        </ul>
-    </div>
-    <script>
+			<li class="item mouse-effect" v-if="member.id == 'admin'">
+				<div class="left">
+					<a href="admin_allmember.html"><img src="img/icon/bookmark.svg" /></a>
+					<div class="name">
+						<a href="admin_allmember.html">모든 회원 관리</a>
+					</div>
+				</div>
+				<div class="right">
+					<img src="img/icon/right_arrow.svg" />
+				</div>
+			</li>
+
+
+			<li class="item mouse-effect" v-if="member.id == 'admin'">
+				<div class="left">
+					<a href="admin_allhotel.html"><img src="img/icon/bookmark.svg" /></a>
+					<div class="name">
+						<a href="admin_allhotel.html">모든 호텔 관리</a>
+					</div>
+				</div>
+				<div class="right">
+					<img src="img/icon/right_arrow.svg" />
+				</div>
+			</li>
+		</ul>
+		<footer>
+			<div class="footer">
+				<table>
+					<tr>
+						<td><a href="#">팀 소개</a></td>
+						<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
+								깃 주소</a></td>
+						<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
+								깃 주소</a></td>
+					</tr>
+					<tr class="footer_img_center">
+						<td colspan="3"><a href="./index.html"><img
+								src="./img/title/hotelcombine.com.png"></a></td>
+					</tr>
+				</table>
+			</div>
+		</footer>
+	</div>
+	<script>
         var main = new Vue({
             el: '#main',
             data() {

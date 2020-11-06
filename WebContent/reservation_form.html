@@ -8,6 +8,7 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 <link rel="stylesheet" href="./css/header.css">
+<link rel="stylesheet" href="./css/footer.css">
 </head>
 
 <body>
@@ -71,6 +72,23 @@
 				<td><button @click="add(room.id)">결제 페이지</button></td>
 			</table>
 		</div>
+		<footer>
+			<div class="footer">
+				<table>
+					<tr>
+						<td><a href="#">팀 소개</a></td>
+						<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
+								깃 주소</a></td>
+						<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
+								깃 주소</a></td>
+					</tr>
+					<tr class="footer_img_center">
+						<td colspan="3"><a href="./index.html"><img
+								src="./img/title/hotelcombine.com.png"></a></td>
+					</tr>
+				</table>
+			</div>
+		</footer>
 	</div>
 	<script>
         var app = new Vue({
