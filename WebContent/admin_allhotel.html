@@ -6,6 +6,7 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<link rel="stylesheet" href="./css/header.css">
 </head>
 <style>
 table.hotel_table {
@@ -44,6 +45,28 @@ table.hotel_table td {
 </style>
 <body>
 	<div id='app'>
+		<header>
+			<div class="nav">
+				<ul v-if="empty">
+					<li class="hotel"><a href="./index.html"> <img
+							src="./img/title/hotelcombine.com.png">
+					</a></li>
+					<li class="login" style="float: right"><a
+						href="./login_member.html">로그인</a></li>
+					<li class="login" style="float: right"><a
+						href="./register_member.html">회원가입</a></li>
+				</ul>
+				<ul v-else>
+					<li class="hotel"><a href="./index.html"> <img
+							src="./img/title/hotelcombine.com.png">
+					</a></li>
+					<li class="logout" style="float: right" :click="logout"><a
+						href="./index.html" @click="logout()">로그아웃</a></li>
+					<li class="logout" style="float: right"><a
+						href="./member_mypage.html">마이페이지</a></li>
+				</ul>
+			</div>
+		</header>
 		<div class='headtitle'>
 			<h2>호텔 리스트</h2>
 		</div>
