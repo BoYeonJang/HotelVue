@@ -38,17 +38,17 @@
 		<div>
 			<form action="#" method="POST" name="updateForm" id="frm"
 				@submit.prevent="update()">
-				아이디 : <input type="text" id="id" name="id" v-model="">
+				아이디 : <input type="text" id="id" name="id" v-model="mid" readonly>
 				<p>
-					비밀번호 : <input type="text" id="password" name="password" v-model="">
+					비밀번호 : <input type="text" id="password" name="password" v-model="info.password">
 				<p>
-					이름 : <input type="text" id="name" name="name" v-model="">
+					이름 : <input type="text" id="name" name="name" v-model="info.name">
 				<p>
-					전화번호 : <input type="text" id="phone" name="phone" v-model="">
+					전화번호 : <input type="text" id="phone" name="phone" v-model="info.phone">
 				<p>
-					주소 : <input type="text" id="address" name="address" v-model="">
+					주소 : <input type="text" id="address" name="address" v-model="info.address">
 				<p>
-					이메일 : <input type="text" id="email" name="email" v-model="">
+					이메일 : <input type="text" id="email" name="email" v-model="info.email">
 				<p>
 
 					<button type="submit">수정 완료</button>
@@ -64,15 +64,9 @@
                     loading: true,
                     errored: false,
                     mid: localStorage.getItem('loginId'),
-                    mpw: '',
-                    mname: '',
-                    mnumber: '',
-                    maddr: '',
-                    memail: '',
                     empty: localStorage.getItem('loginId') == null
                 }
             },
-
             mounted() {
                 axios
                     .get("http://127.0.0.1:8888/findMemberById/" + this.mid)
@@ -83,34 +77,12 @@
                     })
                     .finally(() => this.loading = false)
             },
-
             methods: {
                 update() {
-                    if (this.mid == "") {
-                        alert('아이디를 입력하세요');
-                        return;
-                    }
-                    if (this.mpw == "") {
+                    if (document.getElementById('password').value== "") {
                         alert('비밀번호를 입력하세요');
                         return;
                     }
-                    if (this.mname == "") {
-                        alert('이름을 입력하세요');
-                        return;
-                    }
-                    if (this.mnumber == "") {
-                        alert('전화번호를 입력하세요');
-                        return;
-                    }
-                    if (this.maddr == "") {
-                        alert('주소를 입력하세요');
-                        return;
-                    }
-                    if (this.memail == "") {
-                        alert('이메일 주소를 입력하세요');
-                        return;
-                    }
-
                     axios
 	                    .put("http://127.0.0.1:8888/updateMember", {
 	                       id:this.mid,
