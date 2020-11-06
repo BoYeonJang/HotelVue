@@ -97,10 +97,14 @@
 	                    })
                         .then(function(response) {
                             //alert(app.cname+'님이 등록되었습니다.');
-                            alert(`${app.cname} 님 정보 수정 완료되었습니다.`);
+                            alert(`${app.info.name} 님 정보 수정 완료되었습니다.`);
                             localStorage.removeItem('hId');
                             location.href = "./index.html";
                         })
+                },
+            	logout() {
+                    localStorage.clear();
+                    location.href = './index.html'
                 }
             }
         })
