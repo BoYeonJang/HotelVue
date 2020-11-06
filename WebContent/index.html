@@ -106,7 +106,7 @@
                     </tr>
                     <tr class="footer_img_center">
                         <td colspan="3">
-                            <a href=" ./index.html "><img src="./img/title/hotelcombine.com.png "></a>
+                            <a href="./index.html"><img src="./img/title/hotelcombine.com.png"></a>
                         </td>
                     </tr>
                 </table>
@@ -127,7 +127,7 @@
 
                 },
                 mounted() {
-                    let login = localStorage.getItem("loginId ");
+                    let login = localStorage.getItem("loginId");
                     console.log(this.MemberEmpty);
                     if (login != null) {
                         this.MemberEmpty = false;
@@ -142,11 +142,11 @@
                         location.href = './index.html';
                     },
                     select(city, checkin, checkout, human) {
-                        location.href = "./hotel_list.html ";
-                        sessionStorage.setItem("city ", city);
-                        sessionStorage.setItem("checkin ", checkin);
-                        sessionStorage.setItem("checkout ", checkout);
-                        sessionStorage.setItem("limit ", human);
+                        location.href = "./hotel_list.html";
+                        sessionStorage.setItem("city", city);
+                        sessionStorage.setItem("checkin", checkin);
+                        sessionStorage.setItem("checkout", checkout);
+                        sessionStorage.setItem("limit", human);
                     }
                 },
             }) // Vue

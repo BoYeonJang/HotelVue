@@ -3,6 +3,8 @@ header ul {
     list-style-type: none;
     overflow: hidden;
     background-color: #1e3799;
+    margin: 0;
+    padding: 0;
 }
 
 header li {
