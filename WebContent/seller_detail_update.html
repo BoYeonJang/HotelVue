@@ -33,20 +33,76 @@
 			</div>
 		</header>
 		<h3>호텔 세부 정보 수정</h3>
-		<form action="" id="detail" name="detail">
-			Hotel ID : <input type="text" id="id" name="id">
+		<form action="#" method="POST" id="detail" name="detail"
+			@submit.prevent="update()">
+			Hotel ID : <input type="text" id="id" name="id" v-model="hid"
+				readonly>
 			<p>
-				호텔 명 : <input type="text" id="name" name="name">
+				호텔 명 : <input type="text" id="name" name="name" v-model="info.name">
 			<p>
-				호텔 위치 : <input>
+				호텔 위치 : <input type="text" id="location" name="location"
+					v-model="info.location">
 			<p>
-				호텔 이미지 : <input>
+				호텔 이미지 : <input type="text" id="img" name="img" v-model="info.img">
 			<p>
-				호텔 세부 설명 : <input type="text" name="textfield"
+				호텔 세부 설명 : <input type="text" name="description" id="description"
+					v-model="info.description"
 					style="text-align: center; width: 200px; height: 50px;">
 			<p>
-				<input type="button" id="submit" name="submit" value="수정 완료">
+				<button type="submit">수정 완료</button>
 		</form>
 	</div>
+	<script>
+	var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                info: [],
+                hotel : [],
+                loading: true,
+                errored: false,
+                hid: localStorage.getItem('loginId'),
+                empty: localStorage.getItem('loginId') == null
+            }
+        },
+        mounted() {
+            axios
+                .get("http://127.0.0.1:8888/findHotelById/" + localStorage.getItem('hId'))
+                .then(response => (this.info = response.data))
+                .catch(error => {
+                    console.log(error);
+                    this.errored = true
+                })
+                .finally(() => {
+                	this.loading = false
+                	console.log(this.info.name)
+                })
+        },
+        methods: {
+            update() {
+                /* if (document.getElementById('name').value== "") {
+                    alert('호텔명을 입력하세요');
+                    return;
+                } */
+                axios
+                    .put("http://127.0.0.1:8888/updateHotel", {
+                       id:this.hid,
+                       name:document.getElementById('name').value,
+                       location:document.getElementById('location').value,
+                       img:document.getElementById('img').value,
+                       description:document.getElementById('description').value,
+                       
+                       
+                    })
+                    .then(function(response) {
+                        //alert(app.cname+'님이 등록되었습니다.');
+                        alert(`${app.cname} 정보 수정 완료되었습니다.`);
+                        localStorage.removeItem('hId');
+                        location.href = "./index.html";
+                    })
+            }
+        }
+    })
+	</script>
 </body>
 </html>
