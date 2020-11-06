@@ -8,10 +8,33 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 <link rel="stylesheet" href="./css/star_rating.css">
+<link rel="stylesheet" href="./css/header.css">
 </head>
 <body>
 <h2>후기 남기기</h2><p>
 <div id="app">
+	<header>
+		<div class="nav">
+			<ul v-if="empty">
+				<li class="hotel"><a href="./index.html"> <img
+						src="./img/title/hotelcombine.com.png">
+				</a></li>
+				<li class="login" style="float: right"><a
+					href="./login_member.html">로그인</a></li>
+				<li class="login" style="float: right"><a
+					href="./register_member.html">회원가입</a></li>
+			</ul>
+			<ul v-else>
+				<li class="hotel"><a href="./index.html"> <img
+						src="./img/title/hotelcombine.com.png">
+				</a></li>
+				<li class="logout" style="float: right" :click="logout"><a
+					href="./index.html" @click="logout()">로그아웃</a></li>
+				<li class="logout" style="float: right"><a
+					href="./member_mypage.html">마이페이지</a></li>
+			</ul>
+		</div>
+	</header>
 	<form action="#" method="POST" @submit.prevent="addReview">
 	<span class="star-input"> 
 		<span class="input"> 
@@ -152,7 +175,11 @@
 		                this.errored = true
 		            })
 		            .finally(()=>this.loading = false)
-				}
+				},
+            	logout() {
+                    localStorage.clear();
+                    location.href = './index.html'
+                }
 			}
 			
 		})//vue
