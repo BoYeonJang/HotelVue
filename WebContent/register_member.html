@@ -8,6 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <link rel="stylesheet" href="./css/header.css">
 <link rel="stylesheet" href="./css/footer.css">
+<link rel="stylesheet" href="./css/register_member.css">
 </head>
 
 <body>
@@ -36,44 +37,50 @@
 		</header>
 		<form action="#" method="POST" name="registForm" id="registForm"
 			@submit.prevent="registMember">
-			<table border="1">
-				<tr>
-					<td>회원가입</td>
-				</tr>
-				<tr>
-					<td>아이디</td>
-					<td><input type="text" name="id" id="id" v-model="cid"></td>
-				</tr>
-				<tr>
-					<td>비밀번호</td>
-					<td><input type="password" name="password" id="password"
-						v-model="cpassword"></td>
-				</tr>
-				<tr>
-					<td>이름</td>
-					<td><input type="text" name="name" id="name" v-model="cname"></td>
-				</tr>
-				<tr>
-					<td>핸드폰 번호</td>
-					<td><input type="text" name="phone" id="phone"
-						v-model="cphone"></td>
-				</tr>
-				<tr>
-					<td>주소</td>
-					<td><input type="text" name="address" id="address"
-						v-model="caddress"></td>
-				</tr>
-				<tr>
-					<td>이메일</td>
-					<td><input type="text" name="email" id="email"
-						v-model="cemail"></td>
-				</tr>
-				<tr>
-					<td>호텔 아이디</td>
-					<td><input type="text" name="hotelId" id="hotelId"
-						v-model="chotel_id"></td>
-				</tr>
-			</table>
+			<div class="register">
+				<table border="1">
+					<tr>
+						<th>회원가입</th>
+					</tr>
+					<tr>
+						<td>아이디</td>
+						<td><input type="text" name="id" id="id" v-model="cid" v-on:blur="checkId()"></td>
+					</tr>
+					<tr>
+						<td>비밀번호</td>
+						<td><input type="password" name="password" id="password"
+							v-model="cpassword"></td>
+					</tr>
+					<tr>
+						<td>이름</td>
+						<td><input type="text" name="name" id="name" v-model="cname"></td>
+					</tr>
+					<tr>
+						<td>핸드폰 번호</td>
+						<td><input type="text" name="phone" id="phone"
+							v-model="cphone"></td>
+					</tr>
+					<tr>
+						<td>주소</td>
+						<td><input type="text" name="address" id="address"
+							v-model="caddress"></td>
+					</tr>
+					<tr>
+						<td>이메일</td>
+						<td><input type="text" name="email" id="email"
+							v-model="cemail"></td>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<table border="1">
+					<tr>
+						<td>호텔 아이디</td>
+						<td><input type="text" name="hotelId" id="hotelId"
+							v-model="chotel_id"></td>
+					</tr>
+				</table>
+			</div>
 			<button type="submit" name="button">회원 가입</button>
 		</form>
 		<footer>
@@ -150,6 +157,19 @@
                             alert(`${app.cname} 님이 등록되셨습니다.`);
                             location.href = "./login_member.html";
                         })
+                },
+                checkId(){
+                	axios.get("http://localhost:8888/findMemberById/"+this.cid)
+                	.then(function(response){
+                		if(response.data.id !=null){
+                			alert("중복된 아이디 입니다.")
+                			var input = document.getElementById('id');
+                			input.value = null;
+                			input.focus;
+                		}else{
+                			alert("사용 가능한 아이디 입니다.")
+                		}
+                	})
                 }
             } //method
         })
