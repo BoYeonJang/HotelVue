@@ -9,7 +9,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <link rel="stylesheet" href="./css/header.css">
-<link rel="stylesheet" href="./css/footer.css">
 </head>
 
 <body>
@@ -53,23 +52,6 @@
 				<button type="submit" name="submit">로그인</button>
 			</form>
 		</div>
-		<footer>
-			<div class="footer">
-				<table>
-					<tr>
-						<td><a href="#">팀 소개</a></td>
-						<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
-								깃 주소</a></td>
-						<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
-								깃 주소</a></td>
-					</tr>
-					<tr class="footer_img_center">
-						<td colspan="3"><a href="./index.html"><img
-								src="./img/title/hotelcombine.com.png"></a></td>
-					</tr>
-				</table>
-			</div>
-		</footer>
 	</div>
 	<script>
         var app = new Vue({
@@ -109,16 +91,10 @@
                             password: this.cpassword,
                         })
                         .then(function(response) {
-                        	if(response.data.id == null || response.data.pw != this.cpassword){
-                        		alert("아이디 또는 비밀번호를 잘못입력하였습니다.")
-                        		return ;
-                        	}
-                        	else{
                             alert(`${response.data.name} 님이 로그인 하셨습니다`)
                             localStorage.setItem('loginId', document.getElementById('id').value);
-                            localStorage.removeItem('hId');
+                            localStorage.setItem('hId',response.data.hotelId);
                             location.href = "./index.html";
-                        	}
                         })
                 }
             } //method
