@@ -11,6 +11,7 @@
 <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="./css/header.css">
 <link rel="stylesheet" href="./css/footer.css">
+<link rel="stylesheet" href="./css/pay_form.css">
 </head>
 
 <body>
@@ -37,6 +38,7 @@
 				</ul>
 			</div>
 		</header>
+
 		<div>
 			<table>
 				<tr>
@@ -74,24 +76,25 @@
 			<p>
 				<button @click="add(room.id)">예약 완료</button>
 		</div>
-		<footer>
-			<div class="footer">
-				<table>
-					<tr>
-						<td><a href="#">팀 소개</a></td>
-						<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
-								깃 주소</a></td>
-						<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
-								깃 주소</a></td>
-					</tr>
-					<tr class="footer_img_center">
-						<td colspan="3"><a href="./index.html"><img
-								src="./img/title/hotelcombine.com.png"></a></td>
-					</tr>
-				</table>
-			</div>
-		</footer>
 	</div>
+
+	<footer>
+		<div class="footer">
+			<table>
+				<tr>
+					<td><a href="#">팀 소개</a></td>
+					<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
+							깃 주소</a></td>
+					<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
+							깃 주소</a></td>
+				</tr>
+				<tr class="footer_img_center">
+					<td colspan="3"><a href="./index.html"><img
+							src="./img/title/hotelcombine.com.png"></a></td>
+				</tr>
+			</table>
+		</div>
+	</footer>
 	<script>
         var app = new Vue({
             el: '#app',

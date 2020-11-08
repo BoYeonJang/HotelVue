@@ -7,7 +7,17 @@ body {
 	font-family: 'Do Hyeon', sans-serif;
 }
 
-.register {
+/* .login_member {
+	width: 100%;
+	margin: auto;
+	max-width: 525px;
+	min-height: 670px;
+	position: relative;
+	background: url(../img/background-img/spain.jpg) no-repeat center;
+	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+} */
+
+.login_member {
 	margin: 0 auto;
 	border: 2px solid #1e3799;
 	border-radius: 15px;
@@ -18,11 +28,11 @@ body {
 	height: auto;
 }
 
-.register table {
+.login_member table {
 	margin: 0 auto;
 }
 
-.register table.table input {
+.login_member table.table input {
 	width: 15vw;
 	height: 5vh;
 	border-radius: 15px;

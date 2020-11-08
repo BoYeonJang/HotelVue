@@ -39,13 +39,14 @@
 		<form action="#" method="POST" name="registForm" id="registForm"
 			@submit.prevent="registMember">
 			<div class="register">
-				<table border="1">
+				<table class="table">
 					<tr>
-						<th>회원가입</th>
+						<th colspan="2" class="title">회원가입</th>
 					</tr>
 					<tr>
 						<td>아이디</td>
-						<td><input type="text" name="id" id="id" v-model="cid" v-on:blur="checkId()"></td>
+						<td><input type="text" name="id" id="id" v-model="cid"
+							v-on:blur="checkId()"></td>
 					</tr>
 					<tr>
 						<td>비밀번호</td>
@@ -71,18 +72,23 @@
 						<td><input type="text" name="email" id="email"
 							v-model="cemail"></td>
 					</tr>
-				</table>
-			</div>
-			<div>
-				<table border="1">
+					<tr>
+						<td colspan="2" class="sub_title">* 호텔을 등록하는 판매자라면 호텔 아이디를 함께
+							입력해주세요.
+						</td>
+					</tr>
 					<tr>
 						<td>호텔 아이디</td>
 						<td><input type="text" name="hotelId" id="hotelId"
 							v-model="chotel_id"></td>
 					</tr>
+					<tr>
+						<td colspan="2">
+							<button type="submit" name="button" class="button">회원 가입</button>
+						</td>
+					</tr>
 				</table>
 			</div>
-			<button type="submit" name="button">회원 가입</button>
 		</form>
 		<footer>
 			<div class="footer">

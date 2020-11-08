@@ -1,47 +1,50 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
 body {
-    font-family: 'Do Hyeon', sans-serif;
+	font-family: 'Do Hyeon', sans-serif;
 }
 
 header ul {
-    list-style-type: none;
-    overflow: hidden;
-    background-color: #1e3799;
-    margin: 0;
-    padding: 0;
+	list-style-type: none;
+	overflow: hidden;
+	background-color: #1e3799;
+	margin: 0;
+	padding: 0;
 }
 
 header li {
-    float: left;
-    font-size: 1.25rem;
+	float: left;
+	font-size: 1.5vw;
 }
 
 header li:last-child {
-    border-right: none;
+	border-right: none;
 }
 
 header li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 1vw;
+	text-decoration: none;
 }
 
 header li a:hover {
-    background-color: #4a69bd;
+	background-color: #4a69bd;
 }
 
 header .login {
-    padding-top: 4.5rem;
+	padding-top: 5.3vw;
 }
 
 header .logout {
-    padding-top: 4.5rem;
+	padding-top: 5.3vw;
 }
 
 header img {
-    width: 20rem;
-    height: auto;
+	width: 22.4vw;
+	height: auto;
 }

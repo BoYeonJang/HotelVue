@@ -10,6 +10,8 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="./css/header.css">
+<link rel="stylesheet" href="./css/footer.css">
+<link rel="stylesheet" href="./css/login_member.css">
 </head>
 
 <body>
@@ -39,20 +41,45 @@
 		<div class="login_member">
 			<form action="#" method="post" name="loginForm" id="loginForm"
 				@submit.prevent="loginMember()">
-				<fieldset>
-					<legend>로그인</legend>
-					<p>
-						아이디<br> <input type="text" placeholder="아이디를 입력하세요" id="id"
-							name="id" v-model="cid">
-					</p>
-					<p>
-						비밀번호<br> <input type="password" placeholder="비밀번호를 입력하세요"
-							id="password" name="password" v-model="cpassword">
-					</p>
-				</fieldset>
-				<button type="submit" name="submit">로그인</button>
+				<table class="table">
+					<tr>
+						<th colspan="2" class="title">로그인</th>
+					</tr>
+					<tr>
+						<td>아이디</td>
+						<td><input type="text" placeholder="아이디를 입력하세요" id="id"
+							name="id" v-model="cid"></td>
+					</tr>
+					<tr>
+						<td>비밀번호</td>
+						<td><input type="password" placeholder="비밀번호를 입력하세요"
+							id="password" name="password" v-model="cpassword"></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<button type="submit" name="submit" class="button">로그인</button>
+						</td>
+					</tr>
+				</table>
 			</form>
 		</div>
+		<footer>
+			<div class="footer">
+				<table>
+					<tr>
+						<td><a href="#">팀 소개</a></td>
+						<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
+								깃 주소</a></td>
+						<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
+								깃 주소</a></td>
+					</tr>
+					<tr class="footer_img_center">
+						<td colspan="3"><a href="./index.html"><img
+								src="./img/title/hotelcombine.com.png"></a></td>
+					</tr>
+				</table>
+			</div>
+		</footer>
 	</div>
 	<script>
         var app = new Vue({

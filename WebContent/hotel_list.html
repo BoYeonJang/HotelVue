@@ -11,12 +11,8 @@
 <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="./css/header.css">
 <link rel="stylesheet" href="./css/footer.css">
-<style type="text/css">
-table size {
-	width: 200;
-	height: 200;
-}
-</style>
+<link rel="stylesheet" href="./css/footer.css">
+<link rel="stylesheet" href="./css/hotel_list.css">
 </head>
 
 <body>
@@ -43,21 +39,26 @@ table size {
 				</ul>
 			</div>
 		</header>
-		<div>
-			<table v-for="h in hotel">
+		
+		<div class="list">
+			<table v-for="h in hotel" class="table">
 				<tr>
-					<td>{{h.name}}</td>
+					<td rowspan="4"><img :src="h.img"></td>
+					<td class="name">{{h.name}}</td>
+					<td><button class="button" @click="add(h.id)">선택</button></td>
 				</tr>
 				<tr>
-					<td>{{h.location}}</td>
-					<td>가격</td>
+					<td class="location">{{h.location}}</td>
 				</tr>
 				<tr>
-					<td><img :src="h.img"></td>
-					<td><button @click="add(h.id)">선택</button></td>
+					<td class="description">{{h.description}}</td>
+				</tr>
+				<tr>
+					<td class="price">가격 - 방 가격 중에서 가장 싼 가격만 뿌리기{{}}</td>
 				</tr>
 			</table>
 		</div>
+
 		<footer>
 			<div class="footer">
 				<table>
