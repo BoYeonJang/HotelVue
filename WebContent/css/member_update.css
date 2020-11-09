@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+body {
+	font-family: 'Do Hyeon', sans-serif;
+}
+
+.update {
+	width: 100%;
+	margin: auto;
+	max-width: 525px;
+	min-height: 670px;
+	position: relative;
+	background: url(../img/background-img/usa.jpg) no-repeat center;
+	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
+		rgba(0, 0, 0, .19);
+}
+
+.update {
+	margin: 0 auto;
+	border: 2px solid #1e3799;
+	border-radius: 15px;
+	margin-top: 5vh;
+	margin-bottom: 5vh;
+	background-color: white;
+	width: 30vw;
+	height: auto;
+}
+
+.update table {
+	margin: 0 auto;
+}
+
+.update table.table input {
+	width: 15vw;
+	height: 5vh;
+	border-radius: 15px;
+	font-size: 1.5vw;
+	padding-left: 1vw;
+}
+
+table.table .title {
+	padding-top: 1vw;
+	padding-bottom: 1vw;
+	font-size: 2.5vw;
+	text-align: center;
+	color: #1e3799;
+}
+
+table.table .sub_title {
+	color: #808080;
+}
+
+table.table .button {
+	width: 20vw;
+	height: 6vh;
+	border-radius: 15px;
+	background-color: #1e3799;
+	color: white;
+	font-size: 1.5vw;
+	text-align: center;
+	margin: 0 auto;
+	outline: 0;
+}
