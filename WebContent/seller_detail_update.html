@@ -5,49 +5,72 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>호텔컴바인닷컴 :: 판매자 호텔 정보 수정</title>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="./css/header.css">
 </head>
 <body>
 	<div id="app">
-	<header>
-		<div class="nav">
-			<ul v-if="empty">
-				<li class="hotel"><a href="./index.html"> <img
-						src="./img/title/hotelcombine.com.png">
-				</a></li>
-				<li class="login" style="float: right"><a
-					href="./login_member.html">로그인</a></li>
-				<li class="login" style="float: right"><a
-					href="./register_member.html">회원가입</a></li>
-			</ul>
-			<ul v-else>
-				<li class="hotel"><a href="./index.html"> <img
-						src="./img/title/hotelcombine.com.png">
-				</a></li>
-				<li class="logout" style="float: right" :click="logout"><a
-					href="./index.html" @click="logout()">로그아웃</a></li>
-				<li class="logout" style="float: right"><a
-					href="./member_mypage.html">마이페이지</a></li>
-			</ul>
-		</div>
-	</header>
+		<header>
+			<div class="nav">
+				<ul v-if="empty">
+					<li class="hotel"><a href="./index.html"> <img
+							src="./img/title/hotelcombine.com.png">
+					</a></li>
+					<li class="login" style="float: right"><a
+						href="./login_member.html">로그인</a></li>
+					<li class="login" style="float: right"><a
+						href="./register_member.html">회원가입</a></li>
+				</ul>
+				<ul v-else>
+					<li class="hotel"><a href="./index.html"> <img
+							src="./img/title/hotelcombine.com.png">
+					</a></li>
+					<li class="logout" style="float: right" :click="logout"><a
+						href="./index.html" @click="logout()">로그아웃</a></li>
+					<li class="logout" style="float: right"><a
+						href="./member_mypage.html">마이페이지</a></li>
+				</ul>
+			</div>
+		</header>
 		<h3>호텔 세부 정보 수정</h3>
-		<form action="#" method="POST" id="detail" name="detail" @submit.prevent="update()">
-			Hotel ID : <input type="text" id="id" name="id" v-model="hotel.id" readonly>
+		<form action="#" method="POST" id="detail" name="detail"
+			@submit.prevent="update()">
+			Hotel ID : <input type="text" id="id" name="id" v-model="hotel.id"
+				readonly>
 			<p>
 				호텔 명 : <input type="text" id="name" name="name" v-model="hotel.name">
 			<p>
-				호텔 위치 : <input type="text" id="location" name="location" v-model="hotel.location">
+				호텔 위치 : <input type="text" id="location" name="location"
+					v-model="hotel.location">
 			<p>
 				호텔 이미지 : <input type="text" id="img" name="img" v-model="hotel.img">
-				
 			<p>
-				호텔 세부 설명 : <input type="text" name="description" id="description" v-model="hotel.description" style="text-align: center; width: 200px; height: 50px;" >
+				호텔 세부 설명 : <input type="text" name="description" id="description"
+					v-model="hotel.description"
+					style="text-align: center; width: 200px; height: 50px;">
 			<p>
 				<button type="submit">수정 완료</button>
 		</form>
+		
+		<footer>
+			<div class="footer">
+				<table>
+					<tr>
+						<td><a href="./team.html">팀 소개</a></td>
+						<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
+								깃 주소</a></td>
+						<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
+								깃 주소</a></td>
+					</tr>
+					<tr class="footer_img_center">
+						<td colspan="3"><a href="./index.html"><img
+								src="./img/title/hotelcombine.com.png"></a></td>
+					</tr>
+				</table>
+			</div>
+		</footer>
 	</div>
 	<script>
 	var app = new Vue({
