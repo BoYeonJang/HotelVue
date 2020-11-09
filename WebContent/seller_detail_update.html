@@ -10,9 +10,10 @@
 <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="./css/header.css">
 <link rel="stylesheet" href="./css/footer.css">
+<link rel="stylesheet" href="./css/seller_update.css">
 </head>
 <body>
-	<div id="app">
+	<div id='app'>
 		<header>
 			<div class="nav">
 				<ul v-if="empty">
@@ -36,9 +37,7 @@
 			</div>
 		</header>
 		<div>
-			<h3>호텔 세부 정보 수정</h3>
-			<form action="#" method="POST" id="detail" name="detail"
-				@submit.prevent="update()">
+			<form action="#" method="POST" id="detail" name="detail" @submit.prevent="update()">
 				<div class="seller_update">
 					<table class="table">
 						<tr>
@@ -64,11 +63,11 @@
 						<tr>
 							<td>호텔 세부 설명</td>
 							<td><input type="text" name="description" id="description"
-								v-model="hotel.description" style="width: 20vw; height: 10vh;"></td>
+								v-model="hotel.description" style="width: 30vw; height: 10vh;"></td>
 						</tr>
 						<tr>
-							<td>
-								<button type="submit">수정 완료</button>
+							<td colspan="2">
+								<button type="submit" class="button">수정 완료</button>
 							</td>
 						</tr>
 					</table>
@@ -93,7 +92,9 @@
 				</div>
 			</footer>
 		</div>
-		<script>
+	</div>
+
+	<script>
 			var app = new Vue({
 		        el: '#app',
 		        data() {

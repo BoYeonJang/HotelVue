@@ -1,167 +1,139 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="EUC-KR">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>È£ÅÚÄÄ¹ÙÀÎ´åÄÄ :: °ü¸®ÀÚ ¸¶ÀÌÆäÀÌÁö</title>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<link rel="icon" href="./img/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="./css/header.css">
-<link rel="stylesheet" href="./css/footer.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>í˜¸í…”ì»´ë°”ì¸ë‹·ì»´ :: ê´€ë¦¬ì ë§ˆì´í˜ì´ì§€</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/admin_allmember.css">
 </head>
-<style>
-table.list_table {
-	border-collapse: collapse;
-	text-align: left;
-	line-height: 1.5;
-	text-align: center;
-	width: 80%;
-	margin: auto;
-	font-family: Georgia, "Malgun Gothic", serif;
-}
 
-table.list_table thead th {
-	padding: 10px;
-	font-weight: bold;
-	vertical-align: top;
-	color: #369;
-	border-bottom: 10px solid #036;
-}
-
-table.list_table tbody th {
-	width: 150px;
-	padding: 10px;
-	font-weight: bold;
-	vertical-align: top;
-	border-bottom: 1px solid #ccc;
-	background: #f3f6f7;
-}
-
-table.list_table td {
-	width: 350px;
-	padding: 10px;
-	vertical-align: top;
-	border-bottom: 1px solid #ccc;
-}
-</style>
 <body>
-	<div id='app'>
-		<header>
-			<div class="nav">
-				<ul v-if="empty">
-					<li class="hotel"><a href="./index.html"> <img
-							src="./img/title/hotelcombine.com.png">
-					</a></li>
-					<li class="login" style="float: right"><a
-						href="./login_member.html">·Î±×ÀÎ</a></li>
-					<li class="login" style="float: right"><a
-						href="./register_member.html">È¸¿ø°¡ÀÔ</a></li>
-				</ul>
-				<ul v-else>
-					<li class="hotel"><a href="./index.html"> <img
-							src="./img/title/hotelcombine.com.png">
-					</a></li>
-					<li class="logout" style="float: right" :click="logout"><a
-						href="./index.html" @click="logout()">·Î±×¾Æ¿ô</a></li>
-					<li class="logout" style="float: right"><a
-						href="./member_mypage.html">¸¶ÀÌÆäÀÌÁö</a></li>
-				</ul>
-			</div>
-		</header>
-		<div class='headtitle'>
-			<h2>È¸¿ø ¸®½ºÆ®</h2>
-		</div>
-		<div class='search_box'></div>
-		<table class='list_table' border="2">
-			<tr>
-				<th>È¸¿ø ¾ÆÀÌµğ</th>
-				<th>È¸¿ø ÀÌ¸§</th>
-				<th>È¸¿ø ÀüÈ­¹øÈ£</th>
-				<th>È¸¿ø ÁÖ¼Ò</th>
-				<th>È¸¿ø ÀÌ¸ŞÀÏ</th>
-				<th>È£ÅÚ ¾ÆÀÌµğ</th>
-				<th></th>
-			</tr>
+    <div id='app'>
+        <header>
+            <div class="nav">
+                <ul v-if="empty">
+                    <li class="hotel">
+                        <a href="./index.html"> <img src="./img/title/hotelcombine.com.png">
+                        </a>
+                    </li>
+                    <li class="login" style="float: right"><a href="./login_member.html">ë¡œê·¸ì¸</a></li>
+                    <li class="login" style="float: right"><a href="./register_member.html">íšŒì›ê°€ì…</a></li>
+                </ul>
+                <ul v-else>
+                    <li class="hotel">
+                        <a href="./index.html"> <img src="./img/title/hotelcombine.com.png">
+                        </a>
+                    </li>
+                    <li class="logout" style="float: right" :click="logout"><a href="./index.html" @click="logout()">ë¡œê·¸ì•„ì›ƒ</a></li>
+                    <li class="logout" style="float: right"><a href="./member_mypage.html">ë§ˆì´í˜ì´ì§€</a></li>
+                </ul>
+            </div>
+        </header>
+        <div class='headtitle'>
+            <h2 align="center">íšŒì› ë¦¬ìŠ¤íŠ¸</h2>
+        </div>
+        <div class='search_box'></div>
+        <table class='list_table' border="2">
+            <tr>
+                <th>íšŒì› ì•„ì´ë””</th>
+                <th>íšŒì› ì´ë¦„</th>
+                <th>íšŒì› ì „í™”ë²ˆí˜¸</th>
+                <th>íšŒì› ì£¼ì†Œ</th>
+                <th>íšŒì› ì´ë©”ì¼</th>
+                <th>í˜¸í…” ì•„ì´ë””</th>
+                <th>í˜¸í…” ì‚­ì œ</th>
+            </tr>
 
-			<tr v-for="member in info">
-				<td v-html="member.id"></td>
-				<td v-html="member.name"></td>
-				<td v-html="member.phone"></td>
-				<td v-html="member.address"></td>
-				<td v-html="member.email"></td>
-				<td v-html="member.hotel_id"></td>
-				<td><input type="button" name="delete" value="È¸¿ø »èÁ¦"
-					@click="deleteMember(member.id)"></td>
-			</tr>
-		</table>
-		<footer>
-			<div class="footer">
-				<table>
-					<tr>
-						<td><a href="./team.html">ÆÀ ¼Ò°³</a></td>
-						<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
-								±ê ÁÖ¼Ò</a></td>
-						<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
-								±ê ÁÖ¼Ò</a></td>
-					</tr>
-					<tr class="footer_img_center">
-						<td colspan="3"><a href="./index.html"><img
-								src="./img/title/hotelcombine.com.png"></a></td>
-					</tr>
-				</table>
-			</div>
-		</footer>
-	</div>
-	<script>
-new Vue({
-	el:'#app',
-	data() {
-		return {
-			info : [],
-			loading : true,
-			errored : false,
-			cid : '',
-			cpassword : '',
-			cname : '',
-			cphone : '',
-			caddress : '',
-			cemail : '',
-			chotel_id : '',
-			cmemberid : ''
-		}
-	},//data
-	mounted(){
-		this.retrieveMembers();
-	},
-	methods: {
-		retrieveMembers() {
-			axios
-			.get("http://localhost:8888/findAllMember")
-			.then(response => (this.info = response.data))
-			.catch(error =>{
-				console.log(error);
-				this.errored=true;
-			})
-			.finally(()=>this.loading =false)
-		},
-		deleteMember(memberId) {
-			axios
-			.delete("http://localhost:8888/deleteMember/" + memberId)
-			.then(response => {
-				this.retrieveMembers();
-			})
-			.catch(error =>{
-				console.log(error);
-				this.errored=true;
-			})
-			.finally(function() {
-				this.loading=false
-			})
-		}
-	}
-});
-</script>
+            <tr v-for="member in info">
+                <td v-html="member.id"></td>
+                <td v-html="member.name"></td>
+                <td v-html="member.phone"></td>
+                <td v-html="member.address"></td>
+                <td v-html="member.email"></td>
+                <td v-html="member.hotelId"></td>
+                <td><input type="button" class="button" name="delete" value="íšŒì› ì‚­ì œ" @click="deleteMember(member.id)"></td>
+            </tr>
+        </table>
+        <footer>
+            <div class="footer">
+                <table>
+                    <tr>
+                        <td><a href="./team.html">íŒ€ ì†Œê°œ</a></td>
+                        <td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
+								ê¹ƒ ì£¼ì†Œ</a></td>
+                        <td><a href="https://github.com/BoYeonJang/Hotel">Back-End
+								ê¹ƒ ì£¼ì†Œ</a></td>
+                    </tr>
+                    <tr class="footer_img_center">
+                        <td colspan="3">
+                            <a href="./index.html"><img src="./img/title/hotelcombine.com.png"></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </footer>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    info: [],
+                    loading: true,
+                    errored: false,
+                    cid: '',
+                    cpassword: '',
+                    cname: '',
+                    cphone: '',
+                    caddress: '',
+                    cemail: '',
+                    chotel_id: '',
+                    cmemberid: '',
+                    empty: localStorage.getItem('loginId') == null
+                }
+            }, //data
+            mounted() {
+                this.retrieveMembers();
+            },
+            methods: {
+                retrieveMembers() {
+                    axios
+                        .get("http://localhost:8888/findAllMember")
+                        .then(response => (this.info = response.data))
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(() => this.loading = false)
+                },
+                deleteMember(memberId) {
+                    axios
+                        .delete("http://localhost:8888/deleteMember/" + memberId)
+                        .then(response => {
+                            this.retrieveMembers();
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(function() {
+                            this.loading = false
+                        })
+                },
+                logout() {
+                    localStorage.removeItem("loginId");
+                    localStorage.removeItem('hId');
+                    location.href = './index.html';
+                }
+            }
+        });
+    </script>
 </body>
+
 </html>

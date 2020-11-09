@@ -1,51 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>È£ÅÚÄÄ¹ÙÀÎ´åÄÄ :: °ü¸®ÀÚ ¸¶ÀÌÆäÀÌÁö</title>
+<title>í˜¸í…”ì»´ë°”ì¸ë‹·ì»´ :: ê´€ë¦¬ì ë§ˆì´í˜ì´ì§€</title>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="./css/header.css">
 <link rel="stylesheet" href="./css/footer.css">
+<link rel="stylesheet" href="./css/admin_allhotel.css">
 </head>
-<style>
-table.hotel_table {
-	border-collapse: collapse;
-	text-align: left;
-	line-height: 1.5;
-	text-align: center;
-	width: 80%;
-	margin: auto;
-	font-family: Georgia, "Malgun Gothic", serif;
-}
 
-table.hotel_table thead th {
-	padding: 10px;
-	font-weight: bold;
-	vertical-align: top;
-	color: #369;
-	border-bottom: 3px solid #036;
-}
-
-table.hotel_table tbody th {
-	width: 150px;
-	padding: 10px;
-	font-weight: bold;
-	vertical-align: top;
-	border-bottom: 1px solid #ccc;
-	background: #f3f6f7;
-}
-
-table.hotel_table td {
-	width: 350px;
-	padding: 10px;
-	vertical-align: top;
-	border-bottom: 1px solid #ccc;
-}
-</style>
 <body>
 	<div id='app'>
 		<header>
@@ -55,42 +23,41 @@ table.hotel_table td {
 							src="./img/title/hotelcombine.com.png">
 					</a></li>
 					<li class="login" style="float: right"><a
-						href="./login_member.html">·Î±×ÀÎ</a></li>
+						href="./login_member.html">ë¡œê·¸ì¸</a></li>
 					<li class="login" style="float: right"><a
-						href="./register_member.html">È¸¿ø°¡ÀÔ</a></li>
+						href="./register_member.html">íšŒì›ê°€ì…</a></li>
 				</ul>
 				<ul v-else>
 					<li class="hotel"><a href="./index.html"> <img
 							src="./img/title/hotelcombine.com.png">
 					</a></li>
 					<li class="logout" style="float: right" :click="logout"><a
-						href="./index.html" @click="logout()">·Î±×¾Æ¿ô</a></li>
+						href="./index.html" @click="logout()">ë¡œê·¸ì•„ì›ƒ</a></li>
 					<li class="logout" style="float: right"><a
-						href="./member_mypage.html">¸¶ÀÌÆäÀÌÁö</a></li>
+						href="./member_mypage.html">ë§ˆì´í˜ì´ì§€</a></li>
 				</ul>
 			</div>
 		</header>
 		<div class='headtitle'>
-			<h2>È£ÅÚ ¸®½ºÆ®</h2>
+			<h2 align="center">í˜¸í…” ë¦¬ìŠ¤íŠ¸</h2>
 		</div>
-		<div>
-			<input type="button" name="hotel_management" value="È£ÅÚ °ü¸®"
+		<div class="button" align="center">
+			<input type="button" name="hotel_management" value="í˜¸í…” ê´€ë¦¬" class="button"
 				@click="pageConversion(1)"> <input type="button"
-				name="hotel_admission" value="È£ÅÚ ½ÂÀÎ" @click="pageConversion(0)">
+				name="hotel_admission" value="í˜¸í…” ìŠ¹ì¸" @click="pageConversion(0)" class="button">
 			<p>
 		</div>
 		<div>
 			<table class='hotel_table' border="2">
 				<tr>
-					<th>¾ÆÀÌµğ</th>
-					<th>ÀÌ¸§</th>
-					<th>ÁÖ¼Ò</th>
-					<th>ÀÌ¹ÌÁö</th>
-					<th>»ó¼¼¼³¸í</th>
-					<th></th>
-					<th></th>
+					<th>ì•„ì´ë””</th>
+					<th>ì´ë¦„</th>
+					<th>ì£¼ì†Œ</th>
+					<th>ì´ë¯¸ì§€</th>
+					<th>ìƒì„¸ì„¤ëª…</th>
+					<th>í˜¸í…” ìŠ¹ì¸</th>
+					<th>ìŠ¹ì¸ ê±°ë¶€</th>
 				</tr>
-
 				<tr v-for="hotel in info"
 					v-if="hotel.approved == '1' & approved == '1'">
 					<td v-html="hotel.id"></td>
@@ -98,8 +65,8 @@ table.hotel_table td {
 					<td v-html="hotel.location"></td>
 					<td v-html="hotel.img"></td>
 					<td v-html="hotel.description"></td>
-					<td>ºñ°í</td>
-					<td><input type="button" name="hotel_delete" value="È£ÅÚ »èÁ¦"
+					<td>ë¹„ê³ </td>
+					<td><input type="button" name="hotel_delete" value="í˜¸í…” ì‚­ì œ" class="button"
 						@click="deleteHotel(hotel.id)"></td>
 
 				</tr>
@@ -110,9 +77,9 @@ table.hotel_table td {
 					<td v-html="hotel.location"></td>
 					<td v-html="hotel.img"></td>
 					<td v-html="hotel.description"></td>
-					<td><input type="button" name="hotel_accept" value="È£ÅÚ ½ÂÀÎ"
+					<td><input type="button" name="hotel_accept" value="í˜¸í…” ìŠ¹ì¸" class="button"
 						@click="acceptHotel(hotel)"></td>
-					<td><input type="button" name="hotel_delete" value="½ÂÀÎ °ÅºÎ"
+					<td><input type="button" name="hotel_delete" value="ìŠ¹ì¸ ê±°ë¶€" class="button"
 						@click="deleteHotel(hotel.id)"></td>
 				</tr>
 			</table>
@@ -121,11 +88,11 @@ table.hotel_table td {
 			<div class="footer">
 				<table>
 					<tr>
-						<td><a href="./team.html">ÆÀ ¼Ò°³</a></td>
+						<td><a href="./team.html">íŒ€ ì†Œê°œ</a></td>
 						<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
-								±ê ÁÖ¼Ò</a></td>
+								ê¹ƒ ì£¼ì†Œ</a></td>
 						<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
-								±ê ÁÖ¼Ò</a></td>
+								ê¹ƒ ì£¼ì†Œ</a></td>
 					</tr>
 					<tr class="footer_img_center">
 						<td colspan="3"><a href="./index.html"><img
@@ -136,65 +103,70 @@ table.hotel_table td {
 		</footer>
 	</div>
 	<script>
-new Vue({
-	el:'#app',
-	data() {
-		return {
-			info : [],
-			loading : true,
-			errored : false,
-			approved : 0
-		}
-	},//data
-	mounted(){
-		this.retrieveHotels();
-	},
-	methods: {
-		retrieveHotels() {
-			axios
-			.get("http://localhost:8888/findAllHotel")
-			.then(response => (this.info = response.data))
-			.catch(error =>{
-				console.log(error);
-				this.errored=true;
-			})
-			.finally(()=>this.loading =false)
-		},
-		deleteHotel(hotelId) {
-			axios
-			.delete("http://localhost:8888/deleteHotel/" + hotelId)
-			.then(response => {
-				this.retrieveHotels();
-			})
-			.catch(error =>{
-				console.log(error);
-				this.errored=true;
-			})
-			.finally(function() {
-				this.loading=false
-			})
-		},
-		acceptHotel(hotel) {
-			hotel.approved = 1
-			axios
-			.put("http://localhost:8888/updateHotel/", hotel)
-			.then(response => {
-			})
-			.catch(error =>{
-				console.log(error);
-				this.errored=true;
-			})
-			.finally(function() {
-				this.loading=false
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    info: [],
+                    loading: true,
+                    errored: false,
+                    approved: 0,
+                    empty: localStorage.getItem('loginId') == null
+                }
+            }, //data
+            mounted() {
+                this.retrieveHotels();
+            },
+            methods: {
+                retrieveHotels() {
+                    axios
+                        .get("http://localhost:8888/findAllHotel")
+                        .then(response => (this.info = response.data))
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(() => this.loading = false)
+                },
+                deleteHotel(hotelId) {
+                    axios
+                        .delete("http://localhost:8888/deleteHotel/" + hotelId)
+                        .then(response => {
+                            this.retrieveHotels();
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(function() {
+                            this.loading = false
+                        })
+                },
+                acceptHotel(hotel) {
+                    hotel.approved = 1
+                    axios
+                        .put("http://localhost:8888/updateHotel/", hotel)
+                        .then(response => {})
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(function() {
+                            this.loading = false
 
-			})
-		},
-		pageConversion(approved) {
-			if (approved == 1) this.approved = 1;
-			else this.approved = 0;
-		}
-	}
-});
-</script>
+                        })
+                },
+                pageConversion(approved) {
+                    if (approved == 1) this.approved = 1;
+                    else this.approved = 0;
+                },
+                logout() {
+                    localStorage.removeItem("loginId");
+                    localStorage.removeItem('hId');
+                    location.href = './index.html';
+                }
+            }
+        });
+    </script>
 </body>
 </html>

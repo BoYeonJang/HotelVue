@@ -7,55 +7,52 @@ body {
 	font-family: 'Do Hyeon', sans-serif;
 }
 
-.res_check {
+.seller_update {
 	width: 100%;
 	margin: auto;
 	position: relative;
-	background: url(../img/background-img/spain.jpg) no-repeat center 0;
+	background: url(../img/background-img/usa.jpg) no-repeat center;
 	box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0
 		rgba(0, 0, 0, .19);
 }
 
-.res_check {
+.seller_update {
 	margin: 0 auto;
 	border: 2px solid #1e3799;
 	border-radius: 15px;
 	margin-top: 5vh;
 	margin-bottom: 5vh;
 	background-color: white;
-	width: 80vw;
-	height: 50vh;
+	width: 60vw;
+	height: auto;
 }
 
-.res_check table {
+.seller_update table {
 	margin: 0 auto;
 }
 
-.res_check table.table input {
-	width: 15vw;
+.seller_update table.table input {
+	width: 30vw;
 	height: 5vh;
 	border-radius: 15px;
 	font-size: 1.5vw;
 	padding-left: 1vw;
 }
 
-table.table th  {
+table.table .title {
 	padding-top: 1vw;
 	padding-bottom: 1vw;
-	font-size: 1.5vw;
+	font-size: 2.5vw;
 	text-align: center;
 	color: #1e3799;
 }
 
-table.table td  {
-	padding-top: 1vw;
-	padding-bottom: 1vw;
-	font-size: 1.5vw;
-	text-align: center;
+table.table .sub_title {
+	color: #808080;
 }
 
 table.table .button {
-	width: 10vw;
+	width: 20vw;
 	height: 6vh;
 	border-radius: 15px;
 	background-color: #1e3799;

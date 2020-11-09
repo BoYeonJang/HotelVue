@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>È£ÅÚÄÄ¹ÙÀÎ´åÄÄ :: È¸¿øÀÌ ¿¹¾àÇÑ È£ÅÚ ¸ñ·Ï º¸±â</title>
+<title>í˜¸í…”ì»´ë°”ì¸ë‹·ì»´ :: íšŒì›ì´ ì˜ˆì•½í•œ í˜¸í…” ëª©ë¡ ë³´ê¸°</title>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -13,6 +14,7 @@
 <link rel="stylesheet" href="./css/footer.css">
 <link rel="stylesheet" href="./css/seller_res_check.css">
 </head>
+
 <body>
 	<div id="app">
 		<header>
@@ -22,18 +24,18 @@
 							src="./img/title/hotelcombine.com.png">
 					</a></li>
 					<li class="login" style="float: right"><a
-						href="./login_member.html">·Î±×ÀÎ</a></li>
+						href="./login_member.html">ë¡œê·¸ì¸</a></li>
 					<li class="login" style="float: right"><a
-						href="./register_member.html">È¸¿ø°¡ÀÔ</a></li>
+						href="./register_member.html">íšŒì›ê°€ì…</a></li>
 				</ul>
 				<ul v-else>
 					<li class="hotel"><a href="./index.html"> <img
 							src="./img/title/hotelcombine.com.png">
 					</a></li>
 					<li class="logout" style="float: right" :click="logout"><a
-						href="./index.html" @click="logout()">·Î±×¾Æ¿ô</a></li>
+						href="./index.html" @click="logout()">ë¡œê·¸ì•„ì›ƒ</a></li>
 					<li class="logout" style="float: right"><a
-						href="./member_mypage.html">¸¶ÀÌÆäÀÌÁö</a></li>
+						href="./member_mypage.html">ë§ˆì´í˜ì´ì§€</a></li>
 				</ul>
 			</div>
 		</header>
@@ -41,13 +43,12 @@
 		<div class="res_check">
 			<table class="table">
 				<tr>
-					<th>¿¹¾à¹øÈ£</th>
-					<th>ÀÏÀÚ</th>
-					<th>¿¹¾àÀÎ¿ø</th>
-					<th>¹æÀÌ¸§</th>
-					<th>»èÁ¦</th>
+					<th>ì˜ˆì•½ë²ˆí˜¸</th>
+					<th>ì¼ì</th>
+					<th>ì˜ˆì•½ì¸ì›</th>
+					<th>ë°©ì´ë¦„</th>
+					<th>ì‚­ì œ</th>
 				</tr>
-				<!-- Æ¯Á¤ È£ÅÚ¿¡ ¿¹¾àÇÑ ¿¹¾à Á¤º¸µéÀ» ¸ğµÎ ¿­¶÷ °¡´É -->
 				<template v-for="reservation in reservations"> <template
 					v-for="room in rooms"> <template
 					v-if="reservation.roomId == room.id & room.hotelId == hotel.id">
@@ -57,7 +58,7 @@
 					<td>{{reservation.guestNumber}}</td>
 					<td>{{room.name}}</td>
 					<td><input type="button" name="delete" class="button"
-						@click="deleteReservation(reservation.id)" value="»èÁ¦"></td>
+						@click="deleteReservation(reservation.id)" value="å ì™ì˜™å ì™ì˜™"></td>
 				</tr>
 				</template> </template> </template>
 			</table>
@@ -67,11 +68,11 @@
 			<div class="footer">
 				<table>
 					<tr>
-						<td><a href="./team.html">ÆÀ ¼Ò°³</a></td>
+						<td><a href="./team.html">íŒ€ ì†Œê°œ</a></td>
 						<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
-								±ê ÁÖ¼Ò</a></td>
+								ê¹ƒ ì£¼ì†Œ</a></td>
 						<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
-								±ê ÁÖ¼Ò</a></td>
+								ê¹ƒ ì£¼ì†Œ</a></td>
 					</tr>
 					<tr class="footer_img_center">
 						<td colspan="3"><a href="./index.html"><img
@@ -82,90 +83,91 @@
 		</footer>
 	</div>
 	<script>
-		var app = new Vue({
-			el:'#app',
-			data() {
-				return {
-					loading : true,
-					errored : false,
-					empty: localStorage.getItem('loginId') == null,
-					member : {},
-					hotel : {},
-					rooms : [],
-					reservations : []
-				}
-			},//data
-			mounted(){
-				this.initMember();
-			},
-			methods: {
-				initMember() {
-					axios
-					.get("http://localhost:8888/findMemberById/" + localStorage.getItem('loginId'))
-					.then(response => {
-						this.member = response.data;
-						this.initHotel();
-						this.initRooms();
-						this.initReservations();
-					})
-					.catch(error =>{
-						console.log(error);
-						this.errored=true;
-					})
-					.finally(()=> this.loading =false)
-				},
-				initHotel() {
-					console.log(this.member.hotelId)
-					axios
-					.get("http://localhost:8888/findHotelById/" + this.member.hotelId)
-					.then(response => (this.hotel = response.data))
-					.catch(error =>{
-						console.log(error);
-						this.errored=true;
-					})
-					.finally(()=>this.loading =false)
-				},
-				initRooms() {
-					axios
-					.get("http://localhost:8888/findRoomByHotelId/" + this.member.hotelId)
-					.then(response => (this.rooms = response.data))
-					.catch(error =>{
-						console.log(error);
-						this.errored=true;
-					})
-					.finally(()=>this.loading =false)
-				},
-				initReservations() {
-					axios
-					.get("http://localhost:8888/findAllReservation")
-					.then(response => (this.reservations = response.data))
-					.catch(error =>{
-						console.log(error);
-						this.errored=true;
-					})
-					.finally(()=>this.loading =false)
-				},
-				deleteReservation(reservationId) {
-					axios
-					.delete("http://localhost:8888/deleteReservation/" + reservationId)
-					.then(response => {
-						this.initHotel();
-						this.initRooms();
-						this.initReservations();
-					})
-					.catch(error =>{
-						console.log(error);
-						this.errored=true;
-					})
-					.finally(()=>this.loading =false)
-				},
-		    	logout() {
-		            localStorage.removeItem("loginId")
-		            localStorage.removeItem('hId');
-		            location.href = './index.html'
-		        }
-			}
-		})
-</script>
+        var app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    loading: true,
+                    errored: false,
+                    empty: localStorage.getItem('loginId') == null,
+                    member: {},
+                    hotel: {},
+                    rooms: [],
+                    reservations: []
+                }
+            }, //data
+            mounted() {
+                this.initMember();
+            },
+            methods: {
+                initMember() {
+                    axios
+                        .get("http://localhost:8888/findMemberById/" + localStorage.getItem('loginId'))
+                        .then(response => {
+                            this.member = response.data;
+                            this.initHotel();
+                            this.initRooms();
+                            this.initReservations();
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(() => this.loading = false)
+                },
+                initHotel() {
+                    console.log(this.member.hotelId)
+                    axios
+                        .get("http://localhost:8888/findHotelById/" + this.member.hotelId)
+                        .then(response => (this.hotel = response.data))
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(() => this.loading = false)
+                },
+                initRooms() {
+                    axios
+                        .get("http://localhost:8888/findRoomByHotelId/" + this.member.hotelId)
+                        .then(response => (this.rooms = response.data))
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(() => this.loading = false)
+                },
+                initReservations() {
+                    axios
+                        .get("http://localhost:8888/findAllReservation")
+                        .then(response => (this.reservations = response.data))
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(() => this.loading = false)
+                },
+                deleteReservation(reservationId) {
+                    axios
+                        .delete("http://localhost:8888/deleteReservation/" + reservationId)
+                        .then(response => {
+                            this.initHotel();
+                            this.initRooms();
+                            this.initReservations();
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(() => this.loading = false)
+                },
+                logout() {
+                    localStorage.removeItem("loginId")
+                    localStorage.removeItem('hId');
+                    location.href = './index.html'
+                }
+            }
+        })
+    </script>
 </body>
+
 </html>

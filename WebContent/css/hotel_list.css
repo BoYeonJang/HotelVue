@@ -59,8 +59,9 @@ body {
 	width: 70vw;
 	height: auto;
 	border-radius: 15px;
-	margin-bottom: 30vh;
+	margin-top: 5vh;
 	background-color: white;
+	
 }
 
 table.tour .travel {
@@ -77,4 +78,47 @@ table.tour td {
 	text-align: center;
 	padding-top: 1vw;
 	padding-bottom: 1vw;
+}
+
+table.tour .button {
+	width: 20vw;
+	height: 6vh;
+	border-radius: 15px;
+	background-color: #1e3799;
+	color: white;
+	font-size: 1.5vw;
+	text-align: center;
+	outline: 0;
+}
+
+table.tour .button:hover {
+	background-color: #4a69bd;
+	color: white;
+}
+
+table.tour .city {
+	width: 30vw;
+	height: 6vh;
+	border-radius: 15px;
+	font-size: 1.5vw;
+	padding-left: 1vw;
+	outline: 0;
+}
+
+table.tour .checkin, .checkout, .human {
+	width: 12vw;
+	height: 6vh;
+	border-radius: 15px;
+	font-size: 1.5vw;
+	padding-left: 1vw;
+	outline: 0;
+}
+
+input[type="date"]::before {
+	content: attr(date-placeholder);
+	width: 100%;
+}
+
+input[type="date"]:focus::before, input[type="date"]:valid::before {
+	display: none
 }
