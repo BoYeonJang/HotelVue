@@ -79,23 +79,39 @@
 	</div>
 
 	<footer>
-			<div class="footer">
-				<table>
-					<tr>
-						<td><a href="./team.html">팀 소개</a></td>
-						<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
-								깃 주소</a></td>
-						<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
-								깃 주소</a></td>
-					</tr>
-					<tr class="footer_img_center">
-						<td colspan="3"><a href="./index.html"><img
-								src="./img/title/hotelcombine.com.png"></a></td>
-					</tr>
-				</table>
-			</div>
-		</footer>
+		<div class="footer">
+			<table>
+				<tr>
+					<td><a href="./team.html">팀 소개</a></td>
+					<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
+							깃 주소</a></td>
+					<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
+							깃 주소</a></td>
+				</tr>
+				<tr class="footer_img_center">
+					<td colspan="3"><a href="./index.html"><img
+							src="./img/title/hotelcombine.com.png"></a></td>
+				</tr>
+			</table>
+		</div>
+	</footer>
 	<script>
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+	
+		if(dd<10) {
+		    dd='0'+dd
+		} 
+	
+		if(mm<10) {
+		    mm='0'+mm
+		} 
+	
+		today = yyyy+'-'+mm+'-'+dd;
+		sessionStorage.setItem('today',today);
+	
         var app = new Vue({
             el: '#app',
             data() {
@@ -125,6 +141,7 @@
                         checkin: sessionStorage.getItem('checkin'),
                         checkout: sessionStorage.getItem('checkout'),
                         guestNumber: sessionStorage.getItem('limit'),
+                        resDate : sessionStorage.getItem('today'),
                         cardNumber: this.cn
                     })
                     .then(response => (this.trash = response.data)).catch(error => {

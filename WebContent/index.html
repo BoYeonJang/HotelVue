@@ -77,6 +77,20 @@
 					<th colspan="4" class="travel">어디로 떠나고 싶으세요?</th>
 				</tr>
 				<tr>
+					<td  v-for="c in month">
+						<input type="hidden"  v-if="c.mo== 1"  id="m1" :value="c.cnt">
+						<input type="hidden"  v-if="c.mo== 2"  id="m2" :value="c.cnt">
+						<input type="hidden"  v-if="c.mo== 3"  id="m3" :value="c.cnt">
+						<input type="hidden"  v-if="c.mo== 4"  id="m4" :value="c.cnt">
+						<input type="hidden"  v-if="c.mo== 5"  id="m5" :value="c.cnt">
+						<input type="hidden"  v-if="c.mo== 6"  id="m6" :value="c.cnt">
+						<input type="hidden"  v-if="c.mo== 7"  id="m7" :value="c.cnt">
+						<input type="hidden"  v-if="c.mo== 8"  id="m8" :value="c.cnt">
+						<input type="hidden"  v-if="c.mo== 9"  id="m9" :value="c.cnt">
+						<input type="hidden"  v-if="c.mo== 10"  id="m10" :value="c.cnt">
+						<input type="hidden"  v-if="c.mo== 11"  id="m11" :value="c.cnt">
+						<input type="hidden"  v-if="c.mo== 12"  id="m12" :value="c.cnt">
+					</td>
 					<td><input type="text" v-model="city" class="city"
 						placeholder="예) 서울, 미국"></td>
 					<td><input type="date" v-model="checkin" class="checkin"
@@ -157,7 +171,8 @@
 			</div>
 		</footer>
 	</div>
-	<script>
+<script>
+
         var app = new Vue({
                 el: '#app',
                 data: {
@@ -167,8 +182,10 @@
                     checkout: '',
                     human: '',
                     loading: true,
-                    errored: false
-
+                    errored: false,
+               		month : []
+        			
+               		
                 },
                 mounted() {
                     let login = localStorage.getItem("loginId");
@@ -176,6 +193,129 @@
                     if (login != null) {
                         this.MemberEmpty = false;
                     }
+                    
+                    axios.get("http://127.0.0.1:8888/findReservationMounth")
+                  	.then(response => {
+                  		this.month = response.data
+                  	
+                  		
+                  	})
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    }).finally(() => {this.loading = false
+   
+                    var lat = document.getElementById('m1'); 
+                    if(lat) { 
+                     var one = lat.value; 
+                     
+                    }else{
+                    	var one= 0;
+                    }
+                    
+                    var lat2 = document.getElementById('m2'); 
+                    if(lat2) { 
+                     var two = lat2.value; 
+                     
+                    }else{
+                    	var two= 0;
+                    }
+                    
+                    var lat3 = document.getElementById('m3'); 
+                    if(lat3) { 
+                     var three = lat3.value; 
+                     
+                    }else{
+                    	var three= 0;
+                    }
+                    
+                    var lat4 = document.getElementById('m4'); 
+                    if(lat4) { 
+                     var four = lat4.value; 
+                     
+                    }else{
+                    	var four= 0;
+                    }
+                    var lat5 = document.getElementById('m5'); 
+                    if(lat5) { 
+                     var five = lat5.value; 
+                     
+                    }else{
+                    	var five= 0;
+                    }
+                    var lat6 = document.getElementById('m6'); 
+                    if(lat6) { 
+                     var six = lat6.value; 
+                     
+                    }else{
+                    	var six= 0;
+                    }
+                    var lat7 = document.getElementById('m7'); 
+                    if(lat7) { 
+                     var seven = lat7.value; 
+                     
+                    }else{
+                    	var seven= 0;
+                    }
+                    var lat8 = document.getElementById('m8'); 
+                    if(lat8) { 
+                     var eight = lat8.value; 
+                     
+                    }else{
+                    	var eight= 0;
+                    }
+                    var lat9 = document.getElementById('m9'); 
+                    if(lat9) { 
+                     var nine = lat9.value; 
+                     
+                    }else{
+                    	var nine= 0;
+                    }
+                    var lat10 = document.getElementById('m10'); 
+                    if(lat10) { 
+                     var ten = lat10.value; 
+                     
+                    }else{
+                    	var ten= 0;
+                    }
+                    var lat11 = document.getElementById('m11'); 
+                    if(lat11) { 
+                     var eleven = lat11.value; 
+                     
+                    }else{
+                    	var eleven= 0;
+                    }
+                    var lat12 = document.getElementById('m12'); 
+                    if(lat12) { 
+                     var twelve = lat12.value; 
+                     
+                    }else{
+                    	var twelve= 0;
+                    }
+                    
+              		
+  				  var ctx = document.getElementById('myChart').getContext('2d');
+  			        var chart = new Chart(ctx, {
+  			            type: 'line',
+  			            data: {
+  			            	j : document.getElementById('m1'),
+  			                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','Semtenber','Auctober','Nomember','December'], //마지막 예약 날짜에서부터 1주일 전
+  			                datasets: [{
+  			                	
+  			                    label: 'Number of reservations',
+  			                    backgroundColor: 'transparent',
+  			                    borderColor: 'red',
+  			                    data: [one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve
+  			                    	
+  			                    	] //예약한 날짜 건수
+  			                }]
+  			            },
+  			            // 옵션
+  			            options: {
+  			                responsive: false, //canvas 사이즈 조절시 필요
+  			            }
+  			        });	
+                    })
 
                 }, // mounted,
                 methods: {
@@ -194,23 +334,8 @@
                     }
                 },
             }) // Vue
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'], //마지막 예약 날짜에서부터 1주일 전
-                datasets: [{
-                    label: 'Number of reservations',
-                    backgroundColor: 'transparent',
-                    borderColor: 'red',
-                    data: [10, 10, 15, 2, 20, 30, 60] //예약한 날짜 건수
-                }]
-            },
-            // 옵션
-            options: {
-                responsive: false, //canvas 사이즈 조절시 필요
-            }
-        });
+          
+      
     </script>
 </body>
 
