@@ -20,6 +20,7 @@ h2 {
 	margin-top: 10vh;
 	margin-bottom: 10vh;
 	background-color: white;
+	padding-left: 1vw;
 }
 
 .detail img {
@@ -55,6 +56,55 @@ h2 {
 
 ul {
 	list-style: none;
+}
+
+.tab2_content {
+	margin: 0 auto;
+	border: 2px solid #1e3799;
+	width: 80vw;
+	height: auto;
+	border-radius: 15px;
+	margin-top: 10vh;
+	margin-bottom: 10vh;
+	background-color: white;
+	padding-left: 1vw;
+}
+
+.tab2_content th {
+	color: #1e3799;
+	font-size: 2vw;
+	text-align: left;
+	padding-right: 20vw;
+}
+
+.tab2_content td {
+	font-size: 1.5vw;
+	text-align: left;
+	font-size: 1.5vw;
+}
+
+.tab3_content {
+	margin: 0 auto;
+	border: 2px solid #1e3799;
+	width: 80vw;
+	height: auto;
+	border-radius: 15px;
+	margin-top: 10vh;
+	margin-bottom: 10vh;
+	background-color: white;
+	padding-left: 1vw;
+}
+
+.tab3_content th {
+	color: #1e3799;
+	font-size: 2vw;
+	text-align: left;
+}
+
+.tab3_content td {
+	font-size: 1.5vw;
+	text-align: left;
+	font-size: 1.5vw;
 }
 
 /* 탭 선택 시 표시할 요소(div) 정의(1번 탭 선택 시 첫 번째 div 요소 표시) */

@@ -10,6 +10,7 @@
 <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="./css/header.css">
 <link rel="stylesheet" href="./css/footer.css">
+<link rel="stylesheet" href="./css/member_update.css">
 </head>
 <body>
 	<h2>개인정보 수정</h2>
@@ -36,30 +37,55 @@
 				</ul>
 			</div>
 		</header>
-		<div>
-			<form action="#" method="POST" name="updateForm" id="frm"
-				@submit.prevent="update()">
-				아이디 : <input type="text" id="id" name="id" v-model="mid" readonly>
-				<p>
-					비밀번호 : <input type="text" id="password" name="password"
-						v-model="info.password">
-				<p>
-					이름 : <input type="text" id="name" name="name" v-model="info.name">
-				<p>
-					전화번호 : <input type="text" id="phone" name="phone"
-						v-model="info.phone">
-				<p>
-					주소 : <input type="text" id="address" name="address"
-						v-model="info.address">
-				<p>
-					이메일 : <input type="text" id="email" name="email"
-						v-model="info.email">
-				<p>
 
-					<button type="submit">수정 완료</button>
-			</form>
-		</div>
-		
+		<form action="#" method="POST" name="updateForm" id="frm"
+			@submit.prevent="update()">
+			<div class="update">
+				<table class="table">
+					<tr>
+						<th colspan="2" class="title">회원가입</th>
+					</tr>
+					<tr>
+						<td>아이디</td>
+						<td><input type="text" id="id" name="id" v-model="mid"
+							readonly></td>
+					</tr>
+					<tr>
+						<td>비밀번호</td>
+						<td><input type="text" id="password" name="password"
+							v-model="info.password"></td>
+					</tr>
+					<tr>
+						<td>이름</td>
+						<td><input type="text" id="name" name="name"
+							v-model="info.name"></td>
+					</tr>
+					<tr>
+						<td>핸드폰 번호</td>
+						<td><input type="text" id="phone" name="phone"
+							v-model="info.phone">
+							<p></td>
+					</tr>
+					<tr>
+						<td>주소</td>
+						<td><input type="text" id="address" name="address"
+							v-model="info.address"></td>
+					</tr>
+					<tr>
+						<td>이메일</td>
+						<td><input type="text" id="email" name="email"
+							v-model="info.email"></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<button type="submit" class="button">수정 완료</button>
+						</td>
+					</tr>
+				</table>
+
+			</div>
+		</form>
+
 		<footer>
 			<div class="footer">
 				<table>

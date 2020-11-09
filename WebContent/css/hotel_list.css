@@ -43,7 +43,7 @@ body {
 }
 
 .table tr button.button {
-	width: 5vw;
+	width: 7vw;
 	height: 6vh;
 	border-radius: 15px;
 	background-color: #1e3799;
@@ -51,4 +51,30 @@ body {
 	font-size: 1.5vw;
 	text-align: center;
 	outline: 0;
+}
+
+.tour {
+	margin: 0 auto;
+	border: 2px solid #1e3799;
+	width: 70vw;
+	height: auto;
+	border-radius: 15px;
+	margin-bottom: 30vh;
+	background-color: white;
+}
+
+table.tour .travel {
+	padding-left: 1vw;
+	padding-top: 1vw;
+	padding-bottom: 1vw;
+	font-size: 2.5vw;
+	text-align: center;
+	color: #1e3799;
+}
+
+table.tour td {
+	margin-top: 5vw;
+	text-align: center;
+	padding-top: 1vw;
+	padding-bottom: 1vw;
 }

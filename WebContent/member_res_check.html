@@ -13,9 +13,9 @@
 <link rel="stylesheet" href="./css/mypage.css">
 <link rel="stylesheet" href="./css/footer.css">
 <link rel="stylesheet" href="./css/header.css">
+<link rel="stylesheet" href="./css/member_res_check.css">
 </head>
 <body>
-	<h2>예약내역 확인</h2>
 	<div id="app">
 		<header>
 			<div class="nav">
@@ -39,8 +39,8 @@
 				</ul>
 			</div>
 		</header>
-		<table border="3px">
-			<thead>
+		<div class="res_check">
+			<table class="table">
 				<tr>
 					<th>예약번호</th>
 					<th>일자</th>
@@ -50,28 +50,28 @@
 					<th>취소</th>
 					<th>후기</th>
 				</tr>
-			</thead>
-			<tbody>
-				<template v-for="reservation in reservations"> <template
-					v-for="room in rooms"> <template v-for="hotel in hotels">
-				<template
-					v-if="reservation.roomId == room.id & room.hotelId == hotel.id">
-				<tr>
-					<td>{{reservation.id}}</td>
-					<td>{{reservation.checkin}} ~ {{reservation.checkout}}</td>
-					<td>{{hotel.name}}</td>
-					<td>{{reservation.guestNumber}}</td>
-					<td><input type="button" name="res" id="res" value="상세 정보"
-						@click="reservationDetail(reservation.id)"></td>
-					<td><input type="button" name="delete" value="예약 취소"
-						@click="deleteReservation(reservation.id)"></td>
-					<td><input type="button" name="grade" value="평점/후기"
-						@click="addReview(reservation.id)"></td>
-				</tr>
-				</template> </template> </template> </template>
-			</tbody>
-		</table>
-		
+				<tbody>
+					<template v-for="reservation in reservations"> <template
+						v-for="room in rooms"> <template
+						v-for="hotel in hotels"> <template
+						v-if="reservation.roomId == room.id & room.hotelId == hotel.id">
+					<tr>
+						<td>{{reservation.id}}</td>
+						<td>{{reservation.checkin}} ~ {{reservation.checkout}}</td>
+						<td>{{hotel.name}}</td>
+						<td>{{reservation.guestNumber}}</td>
+						<td><input type="button" name="res" id="res" class="button" value="상세 정보"
+							@click="reservationDetail(reservation.id)"></td>
+						<td><input type="button" name="delete" class="button" value="예약 취소"
+							@click="deleteReservation(reservation.id)"></td>
+						<td><input type="button" name="grade" class="button" value="평점/후기"
+							@click="addReview(reservation.id)"></td>
+					</tr>
+					</template> </template> </template> </template>
+				</tbody>
+			</table>
+		</div>
+
 		<footer>
 			<div class="footer">
 				<table>

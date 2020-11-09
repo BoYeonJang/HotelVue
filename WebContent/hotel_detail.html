@@ -50,13 +50,15 @@
 					<h2>객실 선택</h2>
 					<table class="table" v-for="r in room">
 						<tr>
-							<td rowspan="3"><img src="./img/bangkok.jpg"></td>
+							<td rowspan="4"><img :src="r.img"></td>
 							<td class="name">{{r.name}}</td>
 						</tr>
 						<tr>
 							<td class="peopleLimitedNumber">남아있는 방의 개수:
 								{{r.peopleLimitedNumber}}</td>
-							<td class="price">가격: {{r.price}}</td>
+						</tr>
+						<tr>
+							<td class="price">₩{{r.price | currency}}</td>
 						</tr>
 						<tr>
 							<td><button class="button" @click="add(r.id)">예약하기</button></td>
@@ -65,33 +67,115 @@
 				</div>
 			</div>
 			<div class="tab2_content">
-				<img src="./img/편의 시설:서비스.png">
+				<h2>편의 시설 / 서비스</h2>
+				<table class="tab2_table">
+					<tr>
+						<th>인터넷</th>
+						<th>사용언어</th>
+					</tr>
+					<tr>
+						<td>모든 객실에서 무료 WiFi 이용 가능<br>일부 공용 구역에서 무료 WiFi 이용 가능
+						</td>
+						<td>중국어 <br>영어 <br>프랑스어 <br>일본어 <br>한국어
+						</td>
+					</tr>
+					<tr>
+						<th>주차 및 교통편</th>
+						<th>식음료</th>
+					</tr>
+					<tr>
+						<td>무료 셀프 주차장<br>무료 RV/버스/트럭 주차.
+						</td>
+						<td>룸서비스 이용 가능
+						</td>
+					</tr>
+					<tr>
+						<th>즐길거리</th>
+						<th>야외 시설</th>
+					</tr>
+					<tr>
+						<td>24시간 운영 피트니스 센터</td>
+						<td>정원</td>
+					</tr>
+					<tr>
+						<th>가족 고객 중심 편의 시설 및 서비스</th>
+						<th>편의 시설</th>
+					</tr>
+					<tr>
+						<td>어린이 장난감 <br>드라이클리닝 서비스 <br>무료 유아용 침대 <br>세탁
+							시설 <br>미니 냉장고 <br>방음 객실
+						</td>
+						<td>볼룸 <br>연회장 <br>엘리베이터 <br>로비의 무료 신문 <br>프런트
+							데스크의 귀중품 보관함 <br>사물함 <br>리셉션 <br>홀
+						</td>
+					</tr>
+					<tr>
+						<th>고객 서비스</th>
+						<th>장애인 편의 시설</th>
+					</tr>
+					<tr>
+						<td>24시간 운영 프런트 데스크 <br>콘시어지 서비스 <br>매일 제공 하우스키핑 <br>드라이클리닝
+							<br>세탁 시설 <br>투어/티켓 안내 <br>웨딩 서비스
+						</td>
+						<td>장애인 지원 욕실 <br>점자 표지 <br>욕조 보조
+							손잡이 <br>변기 근처 보조 손잡이 <br>계단 난간 <br>장애인 지원 객실 <br>저상형
+							도어록 <br>저상형 욕실 전기 콘센트 <br>상향식 좌변기 <br>롤인 샤워 <br>시각
+							화재 경보기<br>외 전 구간 휠체어 사용 가능
+						</td>
+					</tr>
+				</table>
 			</div>
 			<div class="tab3_content">
-				<img src="./img/정책.png">
+				<h2>정책</h2>
+				<table class="tab3_table">
+					<tr>
+						<th>체크인</th>
+						<th>체크아웃</th>
+					</tr>
+					<tr>
+						<td>체크인: 15:00 ~ 언제든지 <br>이용 상황에 따라 이른 체크인이 가능할 수 있습니다.
+							<br>최소 체크인 나이 - 만 19세
+						</td>
+						<td>체크아웃: 정오까지<br>이용 상황에 따라 늦은 체크아웃이 가능할 수 있습니다. <br>간편
+							체크아웃
+						</td>
+					</tr>
+					<tr>
+						<th>들어가는 방법</th>
+					</tr>
+					<tr>
+						<td>직원 상주 프런트 데스크</td>
+					</tr>
+					<tr>
+						<th>반려동물</th>
+					</tr>
+					<tr>
+						<td>장애인 안내 동물을 제외한 반려동물은 동반하실 수 없습니다.</td>
+					</tr>
+				</table>
 			</div>
 			<div class="tab4_content">
-				<img src="./img/이용후기.png">
+				여기에 호텔아이디의 이용후기 데이터 가져오기
 			</div>
 		</div>
-	</div>
-	<footer>
-		<div class="footer">
-			<table>
-				<tr>
-					<td><a href="#">팀 소개</a></td>
-					<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
-							깃 주소</a></td>
-					<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
-							깃 주소</a></td>
-				</tr>
-				<tr class="footer_img_center">
-					<td colspan="3"><a href="./index.html"><img
-							src="./img/title/hotelcombine.com.png"></a></td>
-				</tr>
-			</table>
-		</div>
-	</footer>
+
+		<footer>
+			<div class="footer">
+				<table>
+					<tr>
+						<td><a href="./team.html">팀 소개</a></td>
+						<td><a href="https://github.com/BoYeonJang/HotelVue">Front-end
+								깃 주소</a></td>
+						<td><a href="https://github.com/BoYeonJang/Hotel">Back-End
+								깃 주소</a></td>
+					</tr>
+					<tr class="footer_img_center">
+						<td colspan="3"><a href="./index.html"><img
+								src="./img/title/hotelcombine.com.png"></a></td>
+					</tr>
+				</table>
+			</div>
+		</footer>
 	</div>
 	<script>
         var app = new Vue({
@@ -108,8 +192,13 @@
                     limit: sessionStorage.getItem("limit")
 
                 }
-
             }, //data
+            filters: {
+                currency: function (value) {
+                    var num = new Number(value);
+                    return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
+                }
+            }, // filters
             mounted() {
                 axios
                     .post('http://127.0.0.1:8888/findAllOptionApply', {
