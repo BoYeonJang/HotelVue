@@ -86,8 +86,7 @@
 					<tr>
 						<td>무료 셀프 주차장<br>무료 RV/버스/트럭 주차.
 						</td>
-						<td>룸서비스 이용 가능
-						</td>
+						<td>룸서비스 이용 가능</td>
 					</tr>
 					<tr>
 						<th>즐길거리</th>
@@ -117,10 +116,10 @@
 						<td>24시간 운영 프런트 데스크 <br>콘시어지 서비스 <br>매일 제공 하우스키핑 <br>드라이클리닝
 							<br>세탁 시설 <br>투어/티켓 안내 <br>웨딩 서비스
 						</td>
-						<td>장애인 지원 욕실 <br>점자 표지 <br>욕조 보조
-							손잡이 <br>변기 근처 보조 손잡이 <br>계단 난간 <br>장애인 지원 객실 <br>저상형
-							도어록 <br>저상형 욕실 전기 콘센트 <br>상향식 좌변기 <br>롤인 샤워 <br>시각
-							화재 경보기<br>외 전 구간 휠체어 사용 가능
+						<td>장애인 지원 욕실 <br>점자 표지 <br>욕조 보조 손잡이 <br>변기
+							근처 보조 손잡이 <br>계단 난간 <br>장애인 지원 객실 <br>저상형 도어록 <br>저상형
+							욕실 전기 콘센트 <br>상향식 좌변기 <br>롤인 샤워 <br>시각 화재 경보기<br>외
+							전 구간 휠체어 사용 가능
 						</td>
 					</tr>
 				</table>
@@ -155,7 +154,28 @@
 				</table>
 			</div>
 			<div class="tab4_content">
-				여기에 호텔아이디의 이용후기 데이터 가져오기
+				<div class="reviews">
+					<h2>평점</h2>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>작성자</th>
+								<th>평점</th>
+								<th>내용</th>
+							</tr>
+						</thead>
+						<template v-for="review in reviews"> <template
+							v-if="review.hotelId == hotel">
+						<tbody>
+							<tr>
+								<td>{{review.memberId}}</td>
+								<td>{{review.score}}</td>
+								<td>{{review.content}}</td>
+							</tr>
+						</tbody>
+						</template> </template>
+					</table>
+				</div>
 			</div>
 		</div>
 
@@ -183,6 +203,7 @@
             data() {
                 return {
                     room: [],
+                    reviews : [],
                     loading: true,
                     errored: false,
                     empty: localStorage.getItem('loginId') == null,
@@ -190,36 +211,17 @@
                     checkin: sessionStorage.getItem("checkin"),
                     checkout: sessionStorage.getItem("checkout"),
                     limit: sessionStorage.getItem("limit")
-
                 }
             }, //data
             filters: {
-                currency: function (value) {
-                    var num = new Number(value);
-                    return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
-                }
-            }, // filters
+		        currency: function (value) {
+		            var num = new Number(value);
+		            return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1,")
+		        }
+		    }, // filters
             mounted() {
-                axios
-                    .post('http://127.0.0.1:8888/findAllOptionApply', {
-                        hotel: this.hotel,
-                        checkin: this.checkin,
-                        checkout: this.checkout,
-                        limit: this.limit
-
-                    })
-
-                .then(response => (this.room = response.data))
-                    .catch(error => {
-                        console.log(error);
-                        this.errored = true;
-                        console.log(this.limit);
-                    })
-                    .finally(() => {
-
-                        this.loading = false;
-                        console.log(this.room);
-                    })
+               this.findAllReview();
+               this.findRoomByOption();
             },
             methods: {
                 add(id) {
@@ -227,14 +229,39 @@
                     sessionStorage.setItem("hotel", id); //
                 },
                 logout() {
-                    localStorage.removeItem("loginId");
-                    localStorage.removeItem("login");
-                    localStorage.removeItem('hId');
+                    localStorage.clear();
                     location.href = './index.html';
-                }
-            }
-        });
+                },
+                findAllReview() {
+                   axios
+                    .get("http://127.0.0.1:8888/findAllReview")
+                    .then(response => (this.reviews = response.data))
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    })
+                    .finally(() => this.loading = false)
+                },
+                findRoomByOption() {
+                   axios
+                    .post('http://127.0.0.1:8888/findAllOptionApply', {
+                        hotel: this.hotel,
+                        checkin: this.checkin,
+                        checkout: this.checkout,
+                        limit: this.limit
+                    })
+                    .then(response => (this.room = response.data))
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                        console.log(this.limit);
+                    })
+                    .finally(() => {
+                        this.loading = false;
+                    })
+                }//findRoomByoption 
+            }//methods
+        });//vue
     </script>
 </body>
-
 </html>

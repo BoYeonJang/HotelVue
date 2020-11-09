@@ -99,9 +99,35 @@ ul {
 	color: #1e3799;
 	font-size: 2vw;
 	text-align: left;
+	padding-right: 20vw;
 }
 
 .tab3_content td {
+	font-size: 1.5vw;
+	text-align: left;
+	font-size: 1.5vw;
+}
+
+.tab4_content {
+	margin: 0 auto;
+	border: 2px solid #1e3799;
+	width: 80vw;
+	height: auto;
+	border-radius: 15px;
+	margin-top: 10vh;
+	margin-bottom: 10vh;
+	background-color: white;
+	padding-left: 1vw;
+}
+
+.tab4_content th {
+	color: #1e3799;
+	font-size: 2vw;
+	text-align: left;
+	padding-right: 20vw;
+}
+
+.tab4_content td {
 	font-size: 1.5vw;
 	text-align: left;
 	font-size: 1.5vw;
@@ -169,4 +195,3 @@ ul {
 	background: #1e3799;
 	color: white;
 }
-\
